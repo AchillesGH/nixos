@@ -11,7 +11,7 @@ local menu = "rofi -sort -show drun"
 local lock_screen = "hyprlock"
 local clipboard = "rofi -modi clipboard:cliphist-rofi-img -show clipboard -show-icons"
 local colorPicker = "hyprpicker -a -n -r"
-local emojiPicker = "rofimoji" 
+local emojiPicker = "rofimoji"
 
 hl.config({
 	general = {
@@ -184,7 +184,6 @@ bindMe("Escape", "pidof nwg-bar || nwg-bar")
 -- Screenshotting
 hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area -f -n"))
 bindMe("Print", "grimblast copysave output -f -n")
-
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + T", hl.dsp.workspace.toggle_special("term"))
