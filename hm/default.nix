@@ -12,7 +12,6 @@
   ];
 
   home.stateVersion = "26.11";
-
   home.packages = with pkgs; [
     google-fonts
     gcr
@@ -70,6 +69,16 @@
     enable = true;
     enableFishIntegration = true;
   };
+
+
+  home.file = {
+    "Downloads".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Downloads";
+    "Documents".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Documents";
+    "Pictures".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Pictures";
+    "Videos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Videos";
+    "Music".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Music";
+  };
+
   xdg.configFile."nwg-bar/bar.json".text = ''
     [
      {

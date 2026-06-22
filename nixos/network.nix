@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   boot.extraModprobeConfig = "options cfg80211 ieee80211_regdom=IN";
   hardware.wirelessRegulatoryDatabase = true;
@@ -29,12 +29,17 @@
     ];
   };
 
-  networking.nameservers = [
-    "45.90.28.0#264978.dns.nextdns.io"
-    "2a07:a8c0::#264978.dns.nextdns.io"
-    "45.90.30.0#264978.dns.nextdns.io"
-    "2a07:a8c1::#264978.dns.nextdns.io"
-  ];
+  sops.templates.resolved = {
+    content = ''
+      [Resolve]
+      DNS=45.90.28.0#${config.sops.placeholder.nextdns}.dns.nextdns.io
+      DNS=2a07:a8c0::#${config.sops.placeholder.nextdns}.dns.nextdns.io
+      DNS=45.90.30.0#${config.sops.placeholder.nextdns}.dns.nextdns.io
+      DNS=2a07:a8c1::#${config.sops.placeholder.nextdns}.dns.nextdns.io
+      	'';
+    path = "/etc/systemd/resolved.conf.d/dns.conf";
+    mode = "0444";
+  };
   networking.firewall = rec {
     enable = true;
     allowedTCPPortRanges = [

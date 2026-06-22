@@ -34,6 +34,7 @@
       lanzaboote,
       nix-cachyos-kernel,
       zen-browser,
+      sops-nix,
       ...
     }:
     {
@@ -50,7 +51,7 @@
               boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
             }
           )
-
+          sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
           {

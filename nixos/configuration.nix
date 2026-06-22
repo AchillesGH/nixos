@@ -20,6 +20,14 @@
     ./virtualization.nix
     ./mgmt.nix
   ];
+  sops = {
+    defaultSopsFile = ../secrets.yaml;
+    age.keyFile = "/home/confman/.config/sops/age/keys.txt";
+    useTmpfs = true;
+    secrets = {
+      nextdns = { };
+    };
+  };
   programs.ssh.startAgent = true;
   boot.loader.efi.canTouchEfiVariables = true;
   nix.settings.trusted-users = [ "confman" ];
