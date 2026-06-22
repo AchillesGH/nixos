@@ -1,0 +1,376 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hypridle.nix
+  ];
+  services.hyprpolkitagent.enable = true;
+  services.cliphist = {
+
+    enable = true;
+
+    systemdTargets = [ "graphical-session.target" ];
+
+    extraOptions = [
+      "-max-dedupe-search"
+      "10"
+      "-max-items"
+      "500"
+    ];
+    allowImages = true;
+
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      wallpaper = [
+        {
+          monitor = "";
+          # path = "~/Pictures/neon_shallows.jxl";
+          fit_mode = "fill";
+        }
+      ];
+    };
+  };
+
+  systemd.user.services = {
+    cliphist.Service.Slice = "background.slice";
+    cliphist-images.Service.Slice = "background.slice";
+    hyprpaper.Service.Slice = "background.slice";
+  };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    configType = "hyprlang";
+    xwayland.enable = true; # Xwayland can be disabled.
+    systemd.enable = false;
+    settings = {
+
+      #####################
+      ### VARIABLES      ###
+      #####################
+
+
+      env = [
+             "TERM,kitty"
+        "GSK_RENDERER,gl"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "SWWW_TRANSITION,wave"
+        "SWWW_TRANSITION_STEP,100"
+        "SWWW_TRANSITION_FPS,60"
+        "SWWW_TRANSITION_DURATION,2"
+      ];
+
+      permission = [
+        "${config.wayland.windowManager.hyprland.finalPortalPackage}/libexec/xdg-desktop-portal-hyprland, screencopy, allow"
+
+        # ".*, keyboard, ask"
+      ]
+      ++ (with pkgs; [
+        "${lib.getExe grim}, screencopy, allow"
+        "${lib.getExe hyprpicker}, screencopy, allow"
+        "${lib.getExe hyprlock}, screencopy, allow"
+      ]);
+
+      ecosystem = {
+        enforce_permissions = true;
+        no_update_news = true;
+        no_donation_nag = true;
+      };
+
+      monitor = [
+        "desc:AU Optronics 0x9390,1920x1200@60.03,0x0,1.0"
+        "desc:LG Electronics LG TV 0x01010101,3840x2160@60.0,0x1200,2.0"
+      ];
+
+      #####################
+      ### GENERAL        ###
+      #####################
+
+      general = {
+        gaps_in = 2;
+        gaps_out = 6;
+        border_size = 3;
+        resize_on_border = true;
+      };
+
+      #####################
+      ### DECORATION     ###
+      #####################
+
+      decoration = {
+        rounding = 12;
+        rounding_power = 4;
+
+        blur = {
+          enabled = true;
+          size = 5;
+          passes = 3;
+          new_optimizations = true;
+          ignore_opacity = true;
+          noise = 0.055;
+          brightness = 0.96;
+          contrast = 1.04;
+          xray = false;
+        };
+
+        shadow = {
+          enabled = true;
+          range = 100;
+          render_power = 3;
+          offset = "0, 8";
+        };
+      };
+
+      #####################
+      ### ANIMATIONS     ###
+      #####################
+
+      animations = {
+        enabled = true;
+
+        bezier = [
+          "overshot, 0.05, 0.9, 0.1, 1.05"
+          "ccc, 0.17, 0.02, 0.16, 0.92"
+        ];
+
+        animation = [
+          "windows, 1, 1, default"
+          "windowsMove, 1, 4, default"
+          "windowsIn, 1, 3, default, popin 50%"
+          "windowsOut, 1, 2, default, popin 90%"
+          "border, 1, 10, default"
+          "fade, 1, 2, default"
+          "workspaces, 1, 6, overshot"
+        ];
+      };
+
+      #####################
+      ### INPUT          ###
+      #####################
+
+      input = {
+        kb_layout = "us";
+        kb_variant = "";
+        kb_model = "";
+        kb_rules = "";
+        follow_mouse = 1;
+        sensitivity = 0;
+
+        touchpad = {
+          natural_scroll = true;
+        };
+      };
+
+      #####################
+      ### LAYOUT         ###
+      #####################
+
+      dwindle = {
+        preserve_split = true;
+      };
+
+      master = {
+        new_status = "master";
+      };
+
+
+      misc = {
+        force_default_wallpaper = -1;
+        disable_hyprland_logo = true;
+        vrr = 0;
+      };
+
+
+      xwayland = {
+        force_zero_scaling = false;
+      };
+
+
+      gesture = "3, horizontal, workspace";
+
+
+
+
+      monitorv2 = {
+        output = "dummy";
+        mode = "3840x2160@144";
+        position = "5000x0";
+        scale = 2;
+        bitdepth = 10;
+      };
+
+
+      bind = [
+        "SUPER, Escape, exec, nwg-bar"
+        "SUPER CTRL, C, exec, gnome-calculator"
+        "SUPER, Q, exec, kitty"
+        "SUPER SHIFT, Q, exec, kitty --class floatingkitty"
+        "ALT, F4, killactive,"
+        "SUPER, M, exec, $HOME/.config/scripts/logout"
+        "SUPER, E, exec, nemo"
+        "SUPER SHIFT, V, togglefloating,"
+        "SUPER, P, pseudo,"
+        "SUPER, F, fullscreen, 1"
+        "SUPER SHIFT, F, fullscreen, 0"
+        "SUPER, L, exec, hyprlock"
+        "SUPER ALT, right, swapnext"
+        "SUPER ALT, left, swapnext, prev"
+
+        # Focus
+        "SUPER, left, movefocus, l"
+        "SUPER, right, movefocus, r"
+        "SUPER, up, movefocus, u"
+        "SUPER, down, movefocus, d"
+
+        # Monitor workspace move
+        "CTRL ALT SUPER SHIFT, comma, movecurrentworkspacetomonitor, l"
+        "CTRL ALT SUPER SHIFT, period, movecurrentworkspacetomonitor, r"
+
+        # Workspaces
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+        "SUPER, 5, workspace, 5"
+        "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER, 9, workspace, 9"
+        "SUPER, 0, workspace, 10"
+        "CTRL ALT, L, workspace, +1"
+        "CTRL ALT, H, workspace, -1"
+
+        # Move to workspace
+        "SUPER SHIFT, 1, movetoworkspace, 1"
+        "SUPER SHIFT, 2, movetoworkspace, 2"
+        "SUPER SHIFT, 3, movetoworkspace, 3"
+        "SUPER SHIFT, 4, movetoworkspace, 4"
+        "SUPER SHIFT, 5, movetoworkspace, 5"
+        "SUPER SHIFT, 6, movetoworkspace, 6"
+        "SUPER SHIFT, 7, movetoworkspace, 7"
+        "SUPER SHIFT, 8, movetoworkspace, 8"
+        "SUPER SHIFT, 9, movetoworkspace, 9"
+        "SUPER SHIFT, 0, movetoworkspace, 10"
+
+        # Cycle
+        "CTRL ALT, Tab, cyclenext,"
+        "CTRL ALT, Tab, bringactivetotop"
+        # "ALT, Tab, exec,vicinae vicinae://extensions/vicinae/wm/switch-windows"  # vicinae
+        "SUPER, V, exec, rofi -modi clipboard:${pkgs.cliphist}/bin/cliphist-rofi-img -show clipboard -show-icons"
+        # Misc
+        "SUPER SHIFT, C, exec, hyprpicker -a -n -r"
+        "WIN, F1, exec, ~/.config/hypr/gamemode.sh"
+
+        # Special workspaces
+        "SUPER, T, togglespecialworkspace, term"
+        "SUPER, C, togglespecialworkspace, chat"
+        "SUPER, S, movetoworkspace, +0"
+        "SUPER, S, togglespecialworkspace, magic"
+        "SUPER, S, movetoworkspace, special:magic"
+        "SUPER, S, togglespecialworkspace, magic"
+
+        # Scroll workspaces
+        "SUPER, mouse_down, workspace, e+1"
+        "SUPER, mouse_up, workspace, e-1"
+
+        # Audio
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+        # Media
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioStop, exec, playerctl stop"
+
+        # Notifications
+        "SUPER, N, exec, dunstctl history-pop"
+        "SUPER SHIFT, N, exec, dunstctl close"
+        "SUPER SHIFT, N, exec, dunstctl close-all"
+        "SUPER ALT, N, exec, $HOME/.config/scripts/notif-stats.sh"
+        "SUPER ALT, C, exec, dunstctl history-clear"
+
+        # Screenshots
+        "SUPER, PRINT, exec, pidof hyprpicker || hyprshot -m window --freeze"
+        "SUPER SHIFT, PRINT, exec, pidof hyprpicker || hyprshot -m output --freeze"
+        ", PRINT, exec, pidof hyprpicker || hyprshot -m region --freeze"
+
+        # Apps
+        # "SUPER, V, exec, "  # vicinae
+        "SUPER SHIFT, B, exec, kitty --class floatingkitty -e bluetui"
+        "SUPER SHIFT, A, exec, hyprpwcenter"
+        "SUPER CTRL, Q, exec, qalculate-qt"
+        "SUPER, PERIOD, exec, rofimoji"
+        "SUPER, Space, exec, rofi -sort -show drun"
+      ];
+
+      binde = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.25 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.25 @DEFAULT_AUDIO_SINK@ 5%-"
+      ];
+
+      bindel = [
+        ", XF86MonBrightnessUp, exec, brightnessctl s 2%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 2%-"
+      ];
+
+      bindm = [
+        "SUPER, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
+      ];
+
+      #####################
+      ### WORKSPACES     ###
+      #####################
+
+      workspace = [
+        "special:term, on-created-empty:kitty --class floatingkitty"
+        "special:chat, on-created-empty:gtk-launch brave-bcngdmpegpihnheapppgoniglphkpfhm-Default.desktop"
+      ];
+
+      #####################
+      ### WINDOW RULES   ###
+      #####################
+
+      windowrule = [
+        "float on,persistent_size true,match:class ^(org.gnome.Loupe|io.github.kaii_lb.Overskride|org.twosheds.iwgtk|io.github.Qalculate.qalculate-qt|hyprland-share-picker|org.gnome.Calculator|floatingkitty|com.github.hluk.copyq|yad|hyprpwcenter|quickgui|org.gnome.clocks|xdg-desktop-portal-gtk|Toplevel)$"
+        "suppress_event maximize, match:class .*"
+        "size monitor_w/3 monitor_h/5, match:class yad"
+        "size (monitor_w*0.72) (monitor_h*0.80),match:class ^(floatingkitty|hyprpwcenter|xdg-desktop-portal-gtk)"
+        "center on, match:class ^(floatingkitty|hyprpwcenter|yad|xdg-desktop-portal-gtk|org.gnome.Nautilus|Tk|Toplevel)$"
+        "rounding 24, match:float yes"
+        "no_blur on, match:xwayland yes"
+        "no_blur on, match:class ^(quickgui|chromium|brave-browser)$"
+        "float on, match:title ^(Picture-in-Picture|Firefox)$"
+        "size 800 450, match:title ^(Picture-in-Picture|Firefox)$"
+        "pin on, match:title ^(Picture-in-Picture|Firefox)$"
+        "no_shadow on, match:float no"
+        "border_size 1, match:float yes"
+        "center on,match:class .*, match:title ^(Save As)$"
+        "size monitor_w*0.66 monitor_h*0.72, match:class .*, match:title ^(Save As)$"
+        "size monitor_w*0.72 monitor_h*0.72, match:class ^(org.gnome.Nautilus)$"
+        "match:xwayland true, workspace name:x11"
+        "match:xwayland true, border_color rgb(ff0000)"
+        "match:class net.sapples.LiveCaptions, border_size 0, rounding 0, no_shadow 1"
+        "match:workspace special:chat, float 1, size monitor_w*0.85 monitor_h*0.85, center on, rounding 8, border_color rgb(333333), border_size 3"
+        "match:workspace special:term, float 1, size monitor_w*0.85 monitor_h*0.85, center on, rounding 8, border_color rgb(333333), border_size 3"
+        "immediate true, match:class ^(Minecraft.*)"
+      ];
+
+      #####################
+      ### LAYER RULES    ###
+      #####################
+
+      layerrule = [
+        "match:namespace rofi, blur true"
+        "match:namespace waybar, blur true"
+        "match:namespace waybar, ignore_alpha 0"
+        "match:namespace rofi, ignore_alpha 0"
+
+      ];
+
+    };
+  };
+}

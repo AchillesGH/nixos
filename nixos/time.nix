@@ -1,0 +1,36 @@
+{ pkgs, ... }:
+{
+  time = {
+    timeZone = "Asia/Kolkata";
+  };
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  services = {
+    timesyncd.enable = false;
+    chrony = {
+      enable = true;
+      enableNTS = true;
+      extraFlags = [ "-F1" ];
+      extraConfig = ''
+        minsources 3
+        authselectmode prefer
+        dscp 46
+        leapseclist ${pkgs.tzdata}/share/zoneinfo/leap-seconds.list
+        makestep 1.0 3
+        cmdport 0
+        noclientlog
+      ''; # https://github.com/GrapheneOS/infrastructure/blob/main/etc/chrony.conf
+    };
+  };
+
+  networking.timeServers = [
+    "time.cloudflare.com"
+    "paris.time.system76.com" # virginia ohio oregon brazil
+    "ntppool1.time.nl" # ntppool2
+    "nts.netnod.se"
+    "ptbtime1.ptb.de" # ptbtime2 ptbtime3
+    "time.dfm.dk"
+    "time.cifelli.xyz"
+  ];
+}
