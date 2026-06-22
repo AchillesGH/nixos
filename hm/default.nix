@@ -69,8 +69,9 @@
     enable = true;
     enableFishIntegration = true;
   };
-
-
+  xdg.userDirs.setSessionVariables = true;
+  xdg.userDirs.enable = true;
+  xdg.userDirs.extraConfig.SCREENSHOTS = "${config.xdg.userDirs.pictures}/Screenshots";
   home.file = {
     "Downloads".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Downloads";
     "Documents".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Documents";
@@ -78,7 +79,6 @@
     "Videos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Videos";
     "Music".source = config.lib.file.mkOutOfStoreSymlink "/mnt/data/UserData/Music";
   };
-
   xdg.configFile."nwg-bar/bar.json".text = ''
     [
      {
