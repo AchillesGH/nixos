@@ -1,4 +1,4 @@
-{ lib,pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!"; # Disable root login
