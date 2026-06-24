@@ -12,6 +12,7 @@ let
       package ? pkgs.firefox-bin,
       appId,
       folder,
+      debug ? false,
     }:
     let
       sandbox = mkNixPak {
@@ -26,31 +27,31 @@ let
           dbus.policies = {
             "org.freedesktop.Notifications" = "talk";
             "org.freedesktop.ScreenSaver" = "talk";
+
           };
 
           fonts.fonts = config.fonts.packages;
           bubblewrap = {
             network = true;
             shareIpc = true;
-            tmpfs = [ "/tmp" ];
-            bindEntireStore = false;
+            bindEntireStore = debug;
             extraStorePaths = [
               config.hardware.graphics.package
             ]
             ++ config.hardware.graphics.extraPackages
             ++ config.fonts.fontconfig.confPackages;
-            clearEnv = true;
             env = {
               HOME = sloth.homeDir;
               WAYLAND_DISPLAY = sloth.env "WAYLAND_DISPLAY";
               XDG_RUNTIME_DIR = sloth.env "XDG_RUNTIME_DIR";
+              TZ = "Asia/Kolkata";
             };
 
             bind.rw = [
               (sloth.concat' sloth.homeDir "/.config/${folder}")
               (sloth.concat' sloth.homeDir "/Downloads")
             ];
-            bind.ro = [ "/etc/fonts" ];
+            bind.ro = [ "/etc/fonts" ] ++ (if debug then [ "/run/current-system/" ] else [ ]);
           };
 
         };
@@ -64,18 +65,19 @@ in
 
     (mkFFBrowserSandbox {
       package = inputs.zen-browser.packages.${pkgs.system}.beta;
-      appId = "app.zen_browser.zen";
+      appId = "org.mozilla.zen";
       folder = "zen";
     })
     (mkFFBrowserSandbox {
       package = pkgs.firefox-bin;
-      appId = "org.mozilla.FirefoxBinRestricted";
+      appId = "org.mozilla.firefox";
       folder = "mozilla";
     })
     (mkFFBrowserSandbox {
       package = pkgs.zsh;
       appId = "org.debug.Sandbox";
       folder = "debug";
+      debug = true;
     })
   ];
 
