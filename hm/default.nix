@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   home.username = "achilles";
@@ -58,7 +63,10 @@
     qpdfview
     qpdf
     exiftool
-    (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox") {
+    (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox \"$@\"") {
+      meta.priority = -1;
+    })
+    (lib.recursiveUpdate (writeShellScriptBin "zen-beta" "/run/current-system/sw/bin/zen-beta \"$@\"") {
       meta.priority = -1;
     })
   ];
@@ -72,7 +80,7 @@
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
-    package = null;
+    package = inputs.zen-browser.packages.${pkgs.system}.beta;
   };
 
   programs.firefox.enable = true;
