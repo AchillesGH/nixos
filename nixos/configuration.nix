@@ -19,6 +19,7 @@
     ./users.nix
     ./virtualization.nix
     ./mgmt.nix
+    ./sandboxing.nix
   ];
   sops = {
     defaultSopsFile = ../secrets.yaml;
@@ -86,7 +87,6 @@
   };
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
-  programs.firefox.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -103,6 +103,9 @@
     android-tools
     parted
     stylua
+    (ffmpeg-full.override {
+      withUnfree = true;
+    })
   ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 150;
@@ -125,6 +128,38 @@
     user = "achilles";
     dataDir = "/home/achilles/Backups/Phone";
     openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      sansSerif = [ "Adwaita Sans" ];
+      serif = [ "Roboto Serif" ];
+      monospace = [ "Maple Mono" ];
+    };
+    antialias = true;
+    hinting.style = "slight";
+    hinting.enable = true;
+    subpixel.rgba = "rgb";
+    subpixel.lcdfilter = "default";
+
+    localConf = ''
+      <?xml version="1.0"?>
+              <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+              <fontconfig>
+                <alias><family>-apple-system</family><prefer><family>Adwaita Sans</family></prefer></alias>
+                <alias><family>Segoe UI</family><prefer><family>Adwaita Sans</family></prefer></alias>
+                <alias><family>Georgia</family><prefer><family>Gelasio</family></prefer></alias>
+                <alias><family>Latin Modern Roman</family><prefer><family>LMRoman10</family></prefer></alias>
+                <alias><family>Arial</family><prefer><family>Arimo</family></prefer></alias>
+                <alias><family>Calibri</family><prefer><family>Carlito</family></prefer></alias>
+                <alias><family>Verdana</family><prefer><family>Bitstream Vera Sans</family></prefer></alias>
+                <alias><family>SFMono-Regular</family><prefer><family>SF Mono</family></prefer></alias>
+      	  <match target="font">
+                    <edit name="embeddedbitmap" mode="assign"><bool>false</bool></edit>
+                </match>
+              </fontconfig>
+    '';
   };
 
   fonts.packages = with pkgs; [

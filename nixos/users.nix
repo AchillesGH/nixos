@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib,pkgs, ... }:
 {
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!"; # Disable root login
@@ -48,6 +48,8 @@
     modulePath = "pam_access.so";
     args = [ "accessfile=/etc/security/access.conf" ];
   };
+
+  security.pam.services.doas.rules.session.systemd.enable = lib.mkForce true;
 
   users.users.prisoner = {
     isNormalUser = true;

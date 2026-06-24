@@ -41,11 +41,22 @@
       nix-cachyos-kernel,
       zen-browser,
       sops-nix,
+      nixpak,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      mkNixPak = nixpak.lib.nixpak {
+        inherit (pkgs) lib;
+        inherit pkgs;
+      };
+    in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+
+        inherit system;
+        specialArgs = { inherit inputs mkNixPak; };
         modules = [
 
           (
@@ -63,7 +74,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = { inherit inputs mkNixPak; };
             home-manager.sharedModules = [
               zen-browser.homeModules.beta
               stylix.homeModules.stylix
@@ -76,4 +87,5 @@
         ];
       };
     };
+
 }

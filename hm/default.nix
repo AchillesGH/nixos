@@ -58,6 +58,9 @@
     qpdfview
     qpdf
     exiftool
+    (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox") {
+      meta.priority = -1;
+    })
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -65,6 +68,16 @@
       cudaSupport = true;
     }
   );
+
+  programs.zen-browser = {
+    enable = true;
+    setAsDefaultBrowser = true;
+    package = null;
+  };
+
+  programs.firefox.enable = true;
+  programs.firefox.package = pkgs.firefox-bin;
+
   programs.eza = {
     enable = true;
     enableFishIntegration = true;
@@ -140,10 +153,6 @@
     	background-color: rgba (255, 255, 255, 0.1)
     }
   '';
-  programs.zen-browser = {
-    enable = true;
-    setAsDefaultBrowser = true;
-  };
   programs.btop.enable = true;
   programs.fastfetch = {
     enable = true;
@@ -308,41 +317,6 @@
   };
   services.gnome-keyring.enable = true;
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/achilles/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.chromium.enable = true;
@@ -413,41 +387,44 @@
     };
 
   };
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts = {
-      sansSerif = [ "Adwaita Sans" ];
-      serif = [ "Roboto Serif" ];
-      monospace = [ "Maple Mono" ];
-    };
-    antialiasing = true;
-    hinting = "slight";
-
-    subpixelRendering = "rgb";
-
-    configFile."font-aliases" = {
-      priority = 99; # runs after NixOS system conf (52) but before user overrides
+  fonts.fontconfig.enable = false;
+  /*
+    fonts.fontconfig = {
       enable = true;
-      text = ''
-        <?xml version="1.0"?>
-                <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-                <fontconfig>
-                  <alias><family>-apple-system</family><prefer><family>Adwaita Sans</family></prefer></alias>
-                  <alias><family>Segoe UI</family><prefer><family>Adwaita Sans</family></prefer></alias>
-                  <alias><family>Georgia</family><prefer><family>Gelasio</family></prefer></alias>
-                  <alias><family>Latin Modern Roman</family><prefer><family>LMRoman10</family></prefer></alias>
-                  <alias><family>Arial</family><prefer><family>Arimo</family></prefer></alias>
-                  <alias><family>Calibri</family><prefer><family>Carlito</family></prefer></alias>
-                  <alias><family>Verdana</family><prefer><family>Bitstream Vera Sans</family></prefer></alias>
-                  <alias><family>SFMono-Regular</family><prefer><family>SF Mono</family></prefer></alias>
-        	    <match target="font">
-                <edit name="lcdfilter" mode="assign"><const>lcddefault</const></edit>
-                <edit name="embeddedbitmap" mode="assign"><bool>false</bool></edit>
-              </match>
-                </fontconfig>
-      '';
+      defaultFonts = {
+        sansSerif = [ "Adwaita Sans" ];
+        serif = [ "Roboto Serif" ];
+        monospace = [ "Maple Mono" ];
+      };
+      antialiasing = true;
+      hinting = "slight";
+
+      subpixelRendering = "rgb";
+
+      configFile."font-aliases" = {
+        priority = 99; # runs after NixOS system conf (52) but before user overrides
+        enable = true;
+        text = ''
+          <?xml version="1.0"?>
+                  <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+                  <fontconfig>
+                    <alias><family>-apple-system</family><prefer><family>Adwaita Sans</family></prefer></alias>
+                    <alias><family>Segoe UI</family><prefer><family>Adwaita Sans</family></prefer></alias>
+                    <alias><family>Georgia</family><prefer><family>Gelasio</family></prefer></alias>
+                    <alias><family>Latin Modern Roman</family><prefer><family>LMRoman10</family></prefer></alias>
+                    <alias><family>Arial</family><prefer><family>Arimo</family></prefer></alias>
+                    <alias><family>Calibri</family><prefer><family>Carlito</family></prefer></alias>
+                    <alias><family>Verdana</family><prefer><family>Bitstream Vera Sans</family></prefer></alias>
+                    <alias><family>SFMono-Regular</family><prefer><family>SF Mono</family></prefer></alias>
+          	    <match target="font">
+                  <edit name="lcdfilter" mode="assign"><const>lcddefault</const></edit>
+                  <edit name="embeddedbitmap" mode="assign"><bool>false</bool></edit>
+                </match>
+                  </fontconfig>
+        '';
+      };
     };
-  };
+  */
   programs.starship = {
     enable = true;
     settings = {
