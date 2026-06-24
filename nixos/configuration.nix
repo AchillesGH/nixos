@@ -85,8 +85,8 @@
     ];
 
   };
-  programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
+  # programs.hyprland.enable = true;
+  # programs.hyprland.withUWSM = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -99,6 +99,7 @@
     git
     nixfmt
     usbutils
+    tzdata
     packet
     android-tools
     parted
@@ -126,7 +127,7 @@
   services.syncthing = {
     enable = true;
     user = "achilles";
-    dataDir = "/home/achilles/Backups/Phone";
+    dataDir = "/home/achilles/Backups/GrapheneOS";
     openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
   };
 
@@ -199,7 +200,7 @@
     # Adwaita (usually pulled in by GTK, but explicit)
     adwaita-fonts
   ];
-  services.xserver.displayManager.startx.enable = true;
+  programs.uwsm.enable = true;
   services.greetd = {
     enable = true;
     useTextGreeter = true;
@@ -211,6 +212,10 @@
         "${lib.getExe tuigreet} --time --user-menu --remember --remember-session";
     };
   };
+  services.displayManager.sessionPackages = [
+    config.home-manager.users.achilles.wayland.windowManager.hyprland.finalPackage
+  ];
+
   programs.dconf.enable = true;
 
   services.thermald.enable = true;
