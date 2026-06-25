@@ -59,7 +59,6 @@
     overskride
     loupe
     maple-mono.NL-TTF
-    evince
     qpdfview
     qpdf
     exiftool
