@@ -35,6 +35,7 @@ let
             network = true;
             shareIpc = true;
             bindEntireStore = debug;
+            tmpfs = [ "/tmp" ];
             extraStorePaths = [
               config.hardware.graphics.package
             ]
@@ -73,12 +74,33 @@ in
       appId = "org.mozilla.firefox";
       folder = "mozilla";
     })
-    (mkFFBrowserSandbox {
-      package = pkgs.zsh;
-      appId = "org.debug.Sandbox";
-      folder = "debug";
-      debug = true;
-    })
+    (mkNixPak {
+      config = { sloth, ... }: {
+
+        imports = [
+          inputs.nixpak.nixpakModules.gui-base
+        ];
+        app.package = pkgs.papers;
+        flatpak.appId = "org.gnome.Papers";
+        fonts.fonts = config.fonts.packages;
+        bubblewrap = {
+          bindEntireStore = false;
+          tmpfs = [ "/tmp" ];
+          extraStorePaths = [
+            config.hardware.graphics.package
+            config.home-manager.users.achilles.xdg.configFile."gtk-4.0/gtk.css".source
+            config.home-manager.users.achilles.xdg.configFile."gtk-4.0/settings.ini".source
+
+          ]
+          ++ config.hardware.graphics.extraPackages
+          ++ config.fonts.fontconfig.confPackages;
+          bind.ro = [
+            "${config.home-manager.users.achilles.home-files}/.config/gtk-4.0"
+          ];
+        };
+      };
+    }).config.env
+
   ];
 
 }
