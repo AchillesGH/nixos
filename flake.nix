@@ -1,9 +1,5 @@
 {
   description = "Nix flake";
-  nixConfig = {
-    extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
-    extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-  };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
@@ -63,7 +59,7 @@
             { pkgs, ... }:
             {
               nixpkgs.overlays = [
-                nix-cachyos-kernel.overlays.default
+                nix-cachyos-kernel.overlays.pinned
               ];
               boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
             }
@@ -75,10 +71,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs mkNixPak; };
-            home-manager.sharedModules = [
-              zen-browser.homeModules.beta
-              stylix.homeModules.stylix
-            ];
+            home-manager.sharedModules = [ ];
             home-manager.users.achilles = ./hm/default.nix;
             home-manager.users.confman = ./manager;
           }
