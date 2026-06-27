@@ -9,13 +9,16 @@
   home.username = "achilles";
   home.homeDirectory = "/home/achilles";
   imports = [
+    inputs.zen-browser.homeModules.beta
+    inputs.stylix.homeModules.stylix
     ./hyprland
     ./waybar
     ./rofi
     ./nvim
     ./notifs.nix
+    ./browsers.nix
+    ./sandboxing
   ];
-
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
     google-fonts
@@ -62,12 +65,15 @@
     qpdfview
     qpdf
     exiftool
-    (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox \"$@\"") {
-      meta.priority = -1;
-    })
-    (lib.recursiveUpdate (writeShellScriptBin "zen-beta" "/run/current-system/sw/bin/zen-beta \"$@\"") {
-      meta.priority = -1;
-    })
+    python314Packages.curl-cffi
+    /*
+      (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox \"$@\"") {
+        meta.priority = -1;
+      })
+      (lib.recursiveUpdate (writeShellScriptBin "zen-beta" "/run/current-system/sw/bin/zen-beta \"$@\"") {
+        meta.priority = -1;
+      })
+    */
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -76,14 +82,14 @@
     }
   );
 
+  programs.yt-dlp.enable = true;
+
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
-    package = inputs.zen-browser.packages.${pkgs.system}.beta;
+    # package = inputs.zen-browser.packages.${pkgs.system}.beta;
+    package = null;
   };
-
-  programs.firefox.enable = true;
-  programs.firefox.package = pkgs.firefox-bin;
 
   programs.eza = {
     enable = true;

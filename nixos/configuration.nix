@@ -29,6 +29,9 @@
       nextdns = { };
     };
   };
+
+  nix.settings.substituters = lib.mkAfter [ "https://attic.xuyh0120.win/lantian" ];
+  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
   programs.ssh.startAgent = true;
   boot.loader.efi.canTouchEfiVariables = true;
   nix.settings.trusted-users = [ "confman" ];
@@ -130,7 +133,10 @@
     dataDir = "/home/achilles/Backups/GrapheneOS";
     openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
   };
-
+  systemd.services.syncthing.unitConfig = {
+    after = [ "graphical.target" ];
+    wantedBy = lib.mkForce [ ];
+  };
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
@@ -169,7 +175,6 @@
     source-sans
     source-serif
     # General
-    cantarell-fonts
     dejavu_fonts
     freefont_ttf
     noto-fonts
@@ -190,7 +195,6 @@
     libertine
 
     # Nerd fonts (nixpkgs 25.05+)
-    nerd-fonts.iosevka
     nerd-fonts.iosevka-term
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only

@@ -43,7 +43,7 @@
     cliphist-images.Service.Slice = "background.slice";
     hyprpaper.Service.Slice = "background.slice";
   };
-  systemd.user.services.kdeconnect.Service.Environment = lib.mkForce "";
+  systemd.user.services.kdeconnect.Service.Environment = lib.mkForce ""; # fix for upstream issue where env is reset breaking `run command`.
 
   xdg.portal = {
     xdgOpenUsePortal = true;

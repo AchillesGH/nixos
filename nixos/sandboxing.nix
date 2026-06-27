@@ -36,6 +36,7 @@ let
             shareIpc = true;
             bindEntireStore = debug;
             tmpfs = [ "/tmp" ];
+            newSession = true;
             extraStorePaths = [
               config.hardware.graphics.package
             ]
@@ -64,16 +65,18 @@ in
 
   environment.systemPackages = [
 
-    (mkFFBrowserSandbox {
-      package = inputs.zen-browser.packages.${pkgs.system}.beta;
-      appId = "org.mozilla.zen";
-      folder = "zen";
-    })
-    (mkFFBrowserSandbox {
-      package = pkgs.firefox-bin;
-      appId = "org.mozilla.firefox";
-      folder = "mozilla";
-    })
+    /*
+      (mkFFBrowserSandbox {
+        package = inputs.zen-browser.packages.${pkgs.system}.beta;
+        appId = "org.mozilla.zen";
+        folder = "zen";
+      })
+      (mkFFBrowserSandbox {
+        package = pkgs.firefox-bin;
+        appId = "org.mozilla.firefox";
+        folder = "mozilla";
+      })
+    */
     (mkNixPak {
       config = { sloth, ... }: {
 
