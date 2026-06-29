@@ -72,7 +72,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs mkNixPak; };
             home-manager.sharedModules = [ ];
-            home-manager.users.achilles = ./hm/default.nix;
+            home-manager.users.achilles = ./hm;
             home-manager.users.confman = ./manager;
           }
           ./nixos/configuration.nix
