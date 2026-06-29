@@ -5,6 +5,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = false;
   networking.resolvconf.enable = false;
+  networking.dhcpcd.enable = false;
   networking.wireless.iwd.enable = true;
   networking.wireless.iwd.settings = {
     Network = {
