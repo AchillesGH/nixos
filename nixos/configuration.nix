@@ -107,6 +107,7 @@
     android-tools
     parted
     stylua
+    vulnix
     (ffmpeg-full.override {
       withUnfree = true;
     })
