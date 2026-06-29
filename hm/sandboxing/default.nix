@@ -128,6 +128,13 @@ in
       appId = "org.mozilla.zen";
       folder = "zen";
     })
+
+    (mkFFBrowserSandbox {
+      package = pkgs.librewolf-bin;
+      appId = "org.mozilla.librewolf";
+      folder = "librewolf";
+    })
+
   ];
 
 }
