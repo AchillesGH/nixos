@@ -45,7 +45,6 @@
     hyprlock
     imagemagick
     awww
-    prismlauncher
     base16-schemes
     hyprpicker
     rofimoji
