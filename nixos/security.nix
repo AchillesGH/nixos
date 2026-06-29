@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   security.forcePageTableIsolation = true;
   security.protectKernelImage = true;
@@ -17,6 +17,12 @@
     "ax25"
     "netrom"
     "rose"
+
+    # recent vulner sources (dirty-frag family)
+    "esp4"
+    "esp6"
+    "act_pedit"
+    "rxrpc"
 
     # Old or rare or insufficiently audited filesystems
     "adfs"
@@ -48,7 +54,15 @@
     "udf"
     "ufs"
     "vivid"
+
+    "firewire-core" # Blocks FireWire DMA attacks
+    "thunderbolt"
   ];
+
+  boot.extraModprobeConfig = builtins.concatStringsSep "\n" (
+    map (mod: "install ${mod} /bin/true") config.boot.blacklistedKernelModules
+  );
+
   boot.kernel.sysctl = {
     "kernel.kptr_restrict" = 2;
     "kernel.ftrace_enabled" = false;
@@ -113,7 +127,7 @@
       users = [
         "achilles"
       ];
-      keepEnv = true;
+      keepEnv = false;
       persist = true;
       noPass = false;
     }
@@ -135,27 +149,8 @@
       users = [ "achilles" ];
       runAs = "prisoner";
       noPass = true;
+      keepEnv = false;
     }
   ];
-  /*
-    programs.firejail = {
-      enable = true;
-      wrappedBinaries = {
-        librewolf = {
-          executable = "${pkgs.librewolf}/bin/librewolf";
-          profile = "${pkgs.firejail}/etc/firejail/librewolf.profile";
-          extraArgs = [
-            # Required for U2F USB stick
-            "--ignore=private-dev"
-            # Enforce dark mode
-            "--env=GTK_THEME=Adwaita:dark"
-            # Enable system notifications
-            "--dbus-user.talk=org.freedesktop.Notifications"
-          ];
-        };
-
-      };
-    };
-  */
 
 }
