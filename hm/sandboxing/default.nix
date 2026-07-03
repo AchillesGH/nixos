@@ -100,7 +100,8 @@ let
                   "${config.xdg.configFile."gtk-3.0/settings.ini".source}"
                   (sloth.concat' sloth.homeDir "/.config/gtk-3.0/settings.ini")
                 ]
-
+                "/run/cups/cups.sock"
+                "/run/avahi-daemon/socket"
               ]
               ++ (if debug then [ "/run/current-system/" ] else [ ])
             );
