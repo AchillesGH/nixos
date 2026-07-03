@@ -65,14 +65,7 @@
     qpdf
     exiftool
     python314Packages.curl-cffi
-    /*
-      (lib.recursiveUpdate (writeShellScriptBin "firefox" "/run/current-system/sw/bin/firefox \"$@\"") {
-        meta.priority = -1;
-      })
-      (lib.recursiveUpdate (writeShellScriptBin "zen-beta" "/run/current-system/sw/bin/zen-beta \"$@\"") {
-        meta.priority = -1;
-      })
-    */
+
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -80,6 +73,19 @@
       cudaSupport = true;
     }
   );
+  services.pipewire.enable = true;
+  services.pipewire.pulseConfigs = {
+
+    "pulse-server" = {
+      "pulse.properties" = {
+        "server.address" = [
+          "unix:native"
+          "tcp:127.0.0.1:4713"
+        ];
+      };
+    };
+
+  };
 
   programs.yt-dlp.enable = true;
 
