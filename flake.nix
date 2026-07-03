@@ -71,6 +71,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs mkNixPak; };
+            home-manager.startAsUserService = true;
             home-manager.sharedModules = [ ];
             home-manager.users.achilles = ./hm;
             home-manager.users.confman = ./manager;
