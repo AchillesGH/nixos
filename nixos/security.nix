@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 {
   security.forcePageTableIsolation = true;
-  security.protectKernelImage = true;
+  # security.protectKernelImage = true;
   security.pam.services.su.requireWheel = true;
   boot.kernelParams = [
     "slab_nomerge"
