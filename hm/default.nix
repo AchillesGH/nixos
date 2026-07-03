@@ -388,7 +388,7 @@
     };
 
     monospace = {
-      name = "Hack";
+      name = "Maple Mono";
     };
 
     emoji = {
