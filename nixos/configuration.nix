@@ -39,21 +39,33 @@
   services.scx = {
     enable = true;
     scheduler = "scx_lavd";
+    extraArgs = [
+      "--autopower"
+    ];
   };
   boot.kernelParams = [
     "zswap.enabled=1" # enables zswap
     "zswap.compressor=zstd" # compression algorithm
     "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
+    "nvidia.NVreg_EnableGpuFirmware=0"
   ];
+  boot.resumeDevice = "/dev/disk/by-label/swap";
   swapDevices = [
     {
-      device = "/dev/disk/by-partuuid/f17b357d-ed1d-4ccd-b0b4-430b30280cee";
-      randomEncryption.enable = true;
-      randomEncryption.allowDiscards = true;
-      options = [ "discard" ];
+      device = "/dev/disk/by-label/swap";
+      options = [
+        "nofail"
+        "discard"
+      ];
+      encrypted = {
+        enable = true;
+        label = "swap";
+        blkDev = "/dev/disk/by-label/luks_swap";
+      };
     }
   ];
+
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
@@ -108,6 +120,7 @@
     parted
     stylua
     vulnix
+    gpg-tui
     (ffmpeg-full.override {
       withUnfree = true;
     })
@@ -115,6 +128,9 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 150;
   };
+
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-qt;
 
   services.upower.enable = true;
   nix.settings.experimental-features = [
@@ -215,7 +231,14 @@
       default_session.command =
         with pkgs;
         "${lib.getExe tuigreet} --time --user-menu --remember --remember-session";
+
+      initial_session = {
+        command = "uwsm start hyprland-uwsm.desktop";
+        user = "achilles";
+      };
+
     };
+
   };
   services.displayManager.sessionPackages = [
     config.home-manager.users.achilles.wayland.windowManager.hyprland.finalPackage
