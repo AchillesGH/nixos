@@ -11,7 +11,7 @@
     packages = with pkgs; [
       tree
     ];
-    hashedPassword = "$6$MZsrHPycaktj2oKS$dwZFry.WyrBjJ5cjwGJZTRS/Uf2HbyyZAI1DfAqIKCRsuz7d20Mm748c9ZgUfIGpqxVMc334Gj569YulUQY2z1";
+    hashedPassword = "$6$.rLQXqMF5UHsOGlJ$9rP8/OTsRrpat3F57iaRAW4Tl35/DNUbZqBalx/SKbjCn6jcxpW/xObOYZRxr/m1jirr2XVb1J7H6D.5Xk1dF1";
   };
   users.users.confman = {
     isNormalUser = true;
