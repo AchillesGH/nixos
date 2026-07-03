@@ -220,6 +220,7 @@
     nerd-fonts.hack
     # Adwaita (usually pulled in by GTK, but explicit)
     adwaita-fonts
+    maple-mono.variable
   ];
   programs.uwsm.enable = true;
   services.greetd = {
@@ -276,5 +277,16 @@
       INTEL_GPU_MAX_FREQ_ON_BAT = 600;
 
     };
+  };
+  console.earlySetup = true;
+
+  services.kmscon = {
+    enable = true;
+    config = {
+      font-size = 16;
+      hwaccel = true;
+      font-name = "Maple Mono";
+    };
+    extraOptions = "--term xterm-256color";
   };
 }
