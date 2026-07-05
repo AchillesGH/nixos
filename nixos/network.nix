@@ -7,6 +7,7 @@
   networking.resolvconf.enable = false;
   networking.dhcpcd.enable = false;
   networking.wireless.iwd.enable = true;
+
   networking.wireless.iwd.settings = {
     Network = {
       NameResolvingService = "systemd";
@@ -21,16 +22,16 @@
 
   services.resolved.enable = true;
   services.resolved.settings.Resolve = {
-    DNSSEC = "allow-downgrade";
+    DNSSEC = true;
     Domains = [ "~." ];
     DNSOverTLS = true;
-    FallbackDNS = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
+    LLMNR = false;
+    MulticastDNS = false;
+    FallbackDNS = [ ];
   };
 
   sops.templates.resolved = {
+
     content = ''
       [Resolve]
       DNS=45.90.28.0#${config.sops.placeholder.nextdns}.dns.nextdns.io
@@ -38,18 +39,38 @@
       DNS=45.90.30.0#${config.sops.placeholder.nextdns}.dns.nextdns.io
       DNS=2a07:a8c1::#${config.sops.placeholder.nextdns}.dns.nextdns.io
       	'';
+
     path = "/etc/systemd/resolved.conf.d/dns.conf";
     mode = "0444";
   };
   networking.firewall = rec {
     enable = true;
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
+    allowedTCPPortRanges = [ ];
+    allowedUDPPortRanges = [ ];
+    extraCommands = ''
+      iptables -A nixos-fw -p tcp --dport 1714:1764 -s 192.168.1.0/24 -j nixos-fw-accept
+      iptables -A nixos-fw -p udp --dport 1714:1764 -s 192.168.1.0/24 -j nixos-fw-accept
+    '';
+  };
+
+  networking.wg-quick.interfaces = {
+    proton-us = {
+      autostart = false;
+      configFile = "/etc/wireguard/laptop-US-FREE-85.conf";
+    };
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
     ];
-    allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
 }
