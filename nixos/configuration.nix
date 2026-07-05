@@ -75,21 +75,10 @@
 
   systemd.oomd.enable = true;
   # Set your time zone.
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-  services.flatpak.enable = true;
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      cups-filters
-      cups-browsed
-    ];
-  };
+
   programs.fish.enable = true;
 
+  services.flatpak.enable = true;
   programs.steam.enable = true;
   programs.bat = {
     enable = true;
