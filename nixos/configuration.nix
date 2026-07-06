@@ -32,6 +32,7 @@
 
   nix.settings.substituters = lib.mkAfter [ "https://attic.xuyh0120.win/lantian" ];
   nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  nix.package = pkgs.lixPackageSets.stable.lix;
   programs.ssh.startAgent = true;
   boot.loader.efi.canTouchEfiVariables = true;
   nix.settings.trusted-users = [ "confman" ];
@@ -48,7 +49,6 @@
     "zswap.compressor=zstd" # compression algorithm
     "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
-    "nvidia.NVreg_EnableGpuFirmware=0"
   ];
   boot.resumeDevice = "/dev/disk/by-label/swap";
   swapDevices = [
@@ -109,13 +109,14 @@
     parted
     stylua
     vulnix
+    kernel-hardening-checker
     gpg-tui
     (ffmpeg-full.override {
       withUnfree = true;
     })
   ];
   boot.kernel.sysctl = {
-    "vm.swappiness" = 150;
+    "vm.swappiness" = 40;
   };
 
   programs.gnupg.agent.enable = true;
