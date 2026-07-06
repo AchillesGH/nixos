@@ -13,7 +13,6 @@ let
       package ? pkgs.firefox-bin,
       appId,
       folder,
-      debug ? false,
     }:
     let
       sandbox = mkNixPak {
@@ -29,6 +28,8 @@ let
             "org.freedesktop.ScreenSaver" = "talk";
             "${appId}" = "own";
             "${appId}.*" = "own";
+            "org.mpris.MediaPlayer2" = "talk";
+            "org.mpris.MediaPlayer2.*" = "own";
             "org.freedesktop.DBus" = "talk";
             "org.gtk.vfs.*" = "talk";
             "org.gtk.vfs" = "talk";
@@ -38,7 +39,6 @@ let
           };
 
           gpu.enable = lib.mkDefault true;
-          gpu.provider = "bundle";
           fonts.enable = true;
           locale.enable = true;
 
@@ -46,7 +46,7 @@ let
           bubblewrap = {
             network = true;
             shareIpc = true;
-            bindEntireStore = debug;
+            dieWithParent = true;
             tmpfs = [ "/tmp" ];
             newSession = true;
             sockets = {
@@ -87,23 +87,22 @@ let
               (sloth.concat' sloth.runtimeDir "/dconf")
               (sloth.concat' sloth.runtimeDir "/doc")
             ];
-            bind.ro = lib.mkAfter (
-              [
-                (sloth.concat' sloth.xdgConfigHome "/dconf")
-                "/etc/fonts"
+            bind.ro = lib.mkAfter ([
+              (sloth.concat' sloth.xdgConfigHome "/dconf")
+              "/etc/fonts"
 
-                [
-                  "${config.xdg.configFile."gtk-3.0/gtk.css".source}"
-                  (sloth.concat' sloth.homeDir "/.config/gtk-3.0/gtk.css")
-                ]
-                [
-                  "${config.xdg.configFile."gtk-3.0/settings.ini".source}"
-                  (sloth.concat' sloth.homeDir "/.config/gtk-3.0/settings.ini")
-                ]
-                "/run/cups/cups.sock"
-                "/run/avahi-daemon/socket"
+              [
+                "${config.xdg.configFile."gtk-3.0/gtk.css".source}"
+                (sloth.concat' sloth.homeDir "/.config/gtk-3.0/gtk.css")
               ]
-              ++ (if debug then [ "/run/current-system/" ] else [ ])
+              [
+                "${config.xdg.configFile."gtk-3.0/settings.ini".source}"
+                (sloth.concat' sloth.homeDir "/.config/gtk-3.0/settings.ini")
+              ]
+              "/run/cups/cups.sock"
+              "/run/avahi-daemon/socket"
+            ]
+
             );
           };
 
@@ -125,7 +124,12 @@ in
       }
     )
     (mkFFBrowserSandbox {
-      package = inputs.zen-browser.packages.${pkgs.system}.beta;
+      package = inputs.zen-browser.packages.${pkgs.system}.beta.override {
+        cfg = {
+          speechSynthesisSupport = false;
+          pipewireSupport = true;
+        };
+      };
       appId = "org.mozilla.zen";
       folder = "zen";
     })
