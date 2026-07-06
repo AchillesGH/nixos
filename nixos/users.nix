@@ -51,10 +51,11 @@
   users.users.prisoner = {
     isNormalUser = true;
     shell = pkgs.bash;
-
     hashedPassword = "!";
-
     extraGroups = [
+    ];
+    packages = with pkgs; [
+	flatpak
     ];
   };
 

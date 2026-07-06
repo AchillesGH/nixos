@@ -20,4 +20,20 @@
       "nofail"
     ];
   };
+  boot.resumeDevice = "/dev/disk/by-label/swap";
+  swapDevices = [
+    {
+      device = "/dev/disk/by-label/swap";
+      options = [
+        "nofail"
+        "discard"
+      ];
+      encrypted = {
+        enable = true;
+        label = "swap";
+        blkDev = "/dev/disk/by-label/luks_swap";
+      };
+    }
+  ];
+
 }

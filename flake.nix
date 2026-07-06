@@ -75,6 +75,7 @@
             home-manager.sharedModules = [ ];
             home-manager.users.achilles = ./hm;
             home-manager.users.confman = ./manager;
+	    environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
           }
           ./nixos/configuration.nix
 
