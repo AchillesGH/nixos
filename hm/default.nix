@@ -65,7 +65,7 @@
     qpdf
     exiftool
     python314Packages.curl-cffi
-
+    kdePackages.isoimagewriter
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -304,7 +304,7 @@
       "inode/directory" = [ "nemo.desktop" ];
       "application/x-gnome-saved-search" = [ "nemo.desktop" ];
       "text/html" = "zen-beta.desktop";
-      "application/pdf" = "org.gnome.Evince.desktop";
+      "application/pdf" = "org.gnome.Papers.desktop";
       "x-scheme-handler/http" = "zen-beta.desktop";
       "x-scheme-handler/https" = "zen-beta.desktop";
       "x-scheme-handler/about" = "zen-beta.desktop";
@@ -388,7 +388,7 @@
     };
 
     monospace = {
-      name = "Maple Mono";
+      name = "monospace";
     };
 
     emoji = {
