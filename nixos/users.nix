@@ -55,8 +55,7 @@
     extraGroups = [
     ];
     packages = with pkgs; [
-	flatpak
+      flatpak
     ];
   };
-
 }
