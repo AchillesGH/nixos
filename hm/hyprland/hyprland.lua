@@ -17,15 +17,9 @@ hl.config({
 	general = {
 		gaps_in = 5,
 		gaps_out = 5,
-
 		border_size = 2,
-
-		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-		resize_on_border = false,
-
-		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
+		resize_on_border = true,
 		allow_tearing = false,
-
 		layout = "dwindle",
 	},
 
@@ -33,7 +27,6 @@ hl.config({
 		rounding = 10,
 		rounding_power = 2,
 
-		-- Change transparency of focused and unfocused windows
 		active_opacity = 1.0,
 		inactive_opacity = 1.0,
 
@@ -185,18 +178,14 @@ bindMe("Escape", "pidof nwg-bar || nwg-bar")
 hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area -f -n"))
 bindMe("Print", "grimblast copysave output -f -n")
 
--- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + T", hl.dsp.workspace.toggle_special("term"))
 
--- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Laptop multimedia keys for volume and LCD brightness
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
