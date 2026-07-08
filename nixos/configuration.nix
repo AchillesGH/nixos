@@ -126,4 +126,6 @@
     };
     extraOptions = "--term xterm-256color";
   };
+
+  programs.fuse.enable = true;
 }
