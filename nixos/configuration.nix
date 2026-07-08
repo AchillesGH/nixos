@@ -28,7 +28,7 @@
   ];
   sops = {
     defaultSopsFile = ../secrets.yaml;
-    age.keyFile = "/home/confman/.config/sops/age/keys.txt";
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
     useTmpfs = true;
     secrets = {
       nextdns = { };
