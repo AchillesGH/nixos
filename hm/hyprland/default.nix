@@ -46,6 +46,7 @@
   systemd.user.services.kdeconnect.Service.Environment = lib.mkForce ""; # fix for upstream issue where env is reset breaking `run command`.
 
   xdg.portal = {
+    enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
