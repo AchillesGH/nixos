@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  osConfig,
   ...
 }:
 
@@ -380,11 +381,11 @@
   stylix.image = ./neon_shallows.jxl;
   stylix.fonts = {
     serif = {
-      name = "Roboto Serif";
+      name = "serif";
     };
 
     sansSerif = {
-      name = "Adwaita Sans";
+      name = "sans-serif";
     };
 
     monospace = {
@@ -405,44 +406,6 @@
     };
 
   };
-  fonts.fontconfig.enable = false;
-  /*
-    fonts.fontconfig = {
-      enable = true;
-      defaultFonts = {
-        sansSerif = [ "Adwaita Sans" ];
-        serif = [ "Roboto Serif" ];
-        monospace = [ "Maple Mono" ];
-      };
-      antialiasing = true;
-      hinting = "slight";
-
-      subpixelRendering = "rgb";
-
-      configFile."font-aliases" = {
-        priority = 99; # runs after NixOS system conf (52) but before user overrides
-        enable = true;
-        text = ''
-          <?xml version="1.0"?>
-                  <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-                  <fontconfig>
-                    <alias><family>-apple-system</family><prefer><family>Adwaita Sans</family></prefer></alias>
-                    <alias><family>Segoe UI</family><prefer><family>Adwaita Sans</family></prefer></alias>
-                    <alias><family>Georgia</family><prefer><family>Gelasio</family></prefer></alias>
-                    <alias><family>Latin Modern Roman</family><prefer><family>LMRoman10</family></prefer></alias>
-                    <alias><family>Arial</family><prefer><family>Arimo</family></prefer></alias>
-                    <alias><family>Calibri</family><prefer><family>Carlito</family></prefer></alias>
-                    <alias><family>Verdana</family><prefer><family>Bitstream Vera Sans</family></prefer></alias>
-                    <alias><family>SFMono-Regular</family><prefer><family>SF Mono</family></prefer></alias>
-          	    <match target="font">
-                  <edit name="lcdfilter" mode="assign"><const>lcddefault</const></edit>
-                  <edit name="embeddedbitmap" mode="assign"><bool>false</bool></edit>
-                </match>
-                  </fontconfig>
-        '';
-      };
-    };
-  */
   programs.starship = {
     enable = true;
     settings = {
@@ -543,16 +506,4 @@
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
     };
   };
-  /*
-    services.vicinae = {
-      enable = true; # default: false
-      systemd = {
-        enable = true; # default: false
-        autoStart = true; # default: false
-        environment = {
-          USE_LAYER_SHELL = 1;
-        };
-      };
-    };
-  */
 }
