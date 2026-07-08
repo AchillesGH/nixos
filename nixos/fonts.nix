@@ -5,7 +5,10 @@
     defaultFonts = {
       sansSerif = [ "Adwaita Sans" ];
       serif = [ "Roboto Serif" ];
-      monospace = [ "Maple Mono" ];
+      monospace = [
+        "Maple Mono"
+        "Symbols Nerd Font Mono"
+      ];
     };
     antialias = true;
     hinting.style = "slight";
@@ -58,12 +61,7 @@
     libertine
 
     # Nerd fonts (nixpkgs 25.05+)
-    nerd-fonts.iosevka-term
-    nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
-    nerd-fonts.fira-code
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.hack
     # Adwaita (usually pulled in by GTK, but explicit)
     adwaita-fonts
     maple-mono.variable
