@@ -22,9 +22,9 @@
 
   services.resolved.enable = true;
   services.resolved.settings.Resolve = {
-    DNSSEC = true;
+    DNSSEC = "yes";
     Domains = [ "~." ];
-    DNSOverTLS = true;
+    DNSOverTLS = "yes";
     LLMNR = false;
     MulticastDNS = false;
     FallbackDNS = [ ];
