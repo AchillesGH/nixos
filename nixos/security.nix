@@ -152,4 +152,17 @@
     }
   ];
 
+  fileSystems."/proc" = {
+    device = "proc";
+    fsType = "proc";
+    options = [
+      "rw"
+      "nosuid"
+      "nodev"
+      "noexec"
+      "relatime"
+      "hidepid=2"
+      "gid=${toString config.users.groups.wheel.gid}"
+    ];
+  };
 }
