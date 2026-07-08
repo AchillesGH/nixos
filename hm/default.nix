@@ -25,7 +25,6 @@
     google-fonts
     gcr
     pandoc
-    apple-cursor
     wl-clipboard
     papirus-icon-theme
     brightnessctl
@@ -289,9 +288,10 @@
   services.kdeconnect.indicator = true;
   home.pointerCursor = {
     gtk.enable = true;
-    package = pkgs.apple-cursor;
-    name = "macOS";
-    size = 22;
+    package = pkgs.rose-pine-hyprcursor;
+    name = "rose-pine-hyprcursor";
+    hyprcursor.enable = true;
+    size = 24;
   };
   xdg.enable = true;
   xdg.desktopEntries.nemo = {

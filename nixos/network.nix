@@ -41,6 +41,7 @@
       	'';
 
     path = "/etc/systemd/resolved.conf.d/dns.conf";
+    restartUnits = [ "systemd-resolved.service" ];
     mode = "0444";
   };
   networking.firewall = rec {
