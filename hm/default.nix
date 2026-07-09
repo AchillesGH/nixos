@@ -66,6 +66,7 @@
     exiftool
     python314Packages.curl-cffi
     kdePackages.isoimagewriter
+    android-studio
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -288,9 +289,11 @@
   services.kdeconnect.indicator = true;
   home.pointerCursor = {
     gtk.enable = true;
+    enable = true;
     package = pkgs.rose-pine-hyprcursor;
     name = "rose-pine-hyprcursor";
     hyprcursor.enable = true;
+    x11.enable = true;
     size = 24;
   };
   xdg.enable = true;
