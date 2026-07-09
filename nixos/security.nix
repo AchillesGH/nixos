@@ -145,6 +145,14 @@
     }
 
     {
+      users = [ "confman" ];
+      cmd = "nix-collect-garbage";
+      args = [ "-d" ];
+      keepEnv = false;
+      noPass = true;
+    }
+
+    {
       users = [ "achilles" ];
       runAs = "prisoner";
       noPass = true;
