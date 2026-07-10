@@ -67,6 +67,8 @@
     python314Packages.curl-cffi
     kdePackages.isoimagewriter
     android-studio
+    clang-tools
+    clang
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
