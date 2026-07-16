@@ -67,6 +67,7 @@
     "kernel.ftrace_enabled" = false;
     "kernel.sysrq" = 0;
     "kernel.io_uring_disabled" = 2;
+    "kernel.yama.ptrace_scope" = 2;
 
     "net.ipv4.conf.all.accept_redirects" = 0;
     "net.ipv6.conf.all.accept_redirects" = 0;
