@@ -127,5 +127,6 @@
     extraOptions = "--term xterm-256color";
   };
 
-  programs.fuse.enable = true;
+  programs.fuse.enable = true; # for xdg-desktop-porta-gtk
+
 }
