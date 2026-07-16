@@ -91,7 +91,7 @@
   };
 
   programs.yt-dlp.enable = true;
-
+  programs.direnv.enable = true;
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
@@ -509,5 +509,8 @@
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
     };
+  };
+  programs.quickshell = {
+    enable = true;
   };
 }
