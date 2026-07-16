@@ -13,6 +13,8 @@ let
       package ? pkgs.firefox-bin,
       appId,
       folder,
+      extraDbusPolicies ? { },
+      enablePasta ? false,
     }:
     let
       sandbox = mkNixPak {
@@ -23,6 +25,7 @@ let
           ];
           app.package = package;
           flatpak.appId = appId;
+          pasta.enable = enablePasta;
           dbus.policies = {
             "org.freedesktop.Notifications" = "talk";
             "org.freedesktop.ScreenSaver" = "talk";
@@ -36,7 +39,8 @@ let
             "ca.desrt.dconf" = "talk";
             "org.freedesktop.portal.*" = "talk";
             "org.a11y.Bus" = "talk";
-          };
+          }
+          // extraDbusPolicies;
 
           gpu.enable = lib.mkDefault true;
           fonts.enable = true;
@@ -123,6 +127,36 @@ in
         meta.priority = -1;
       }
     )
+
+    (
+      mkFFBrowserSandbox {
+        package = config.programs.chromium.finalPackage;
+        appId = "org.chromium.Chromium";
+        folder = "chromium";
+        extraDbusPolicies = {
+          "org.freedesktop.secrets" = "talk";
+        };
+      }
+      // {
+        meta.priority = -1;
+      }
+    )
+
+    (
+      mkFFBrowserSandbox {
+        package = config.programs.brave.finalPackage;
+        appId = "com.brave.Browser";
+        folder = "BraveSoftware";
+        enablePasta = true;
+        extraDbusPolicies = {
+          "org.freedesktop.secrets" = "talk";
+        };
+      }
+      // {
+        meta.priority = -1;
+      }
+    )
+
     (mkFFBrowserSandbox {
       package = inputs.zen-browser.packages.${pkgs.system}.beta.override {
         cfg = {
