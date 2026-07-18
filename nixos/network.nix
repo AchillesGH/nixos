@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   boot.extraModprobeConfig = "options cfg80211 ieee80211_regdom=IN";
   hardware.wirelessRegulatoryDatabase = true;
@@ -10,7 +10,7 @@
 
   networking.wireless.iwd.settings = {
     Network = {
-      NameResolvingService = "systemd";
+      NameResolvingService = "none";
     };
     General = {
       EnableNetworkConfiguration = true;
@@ -27,7 +27,7 @@
     DNSOverTLS = "yes";
     LLMNR = false;
     MulticastDNS = false;
-    FallbackDNS = [ ];
+    FallbackDNS = false;
   };
 
   sops.templates.resolved = {
