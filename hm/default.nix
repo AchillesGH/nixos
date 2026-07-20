@@ -55,6 +55,7 @@
     hyprshutdown
     vlc
     proton-vpn
+    proton-vpn-cli
     qalculate-qt
     impala
     ghostscript
