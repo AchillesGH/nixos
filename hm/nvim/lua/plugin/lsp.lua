@@ -5,6 +5,6 @@ vim.schedule(function()
 		"pyright",
 		"clangd",
 		"rust-analyzer",
-		"asm-lsp"
+		"asm-lsp",
 	})
 end)
