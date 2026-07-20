@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   xdg.configFile = {
-#     "nvim/after".source = ./lua/after;
+    #     "nvim/after".source = ./lua/after;
     "nvim/plugin".source = ./lua/plugin;
   };
 
