@@ -104,12 +104,14 @@
   ];
   system.stateVersion = "26.11";
 
-  services.syncthing = {
-    enable = true;
-    user = "achilles";
-    dataDir = "/home/achilles/Backups/GrapheneOS";
-    openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
-  };
+  /*
+    services.syncthing = {
+      enable = true;
+      user = "achilles";
+      dataDir = "/home/achilles/Backups/GrapheneOS";
+      openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
+    };
+  */
   systemd.services.syncthing.unitConfig = {
     after = [ "graphical.target" ];
     wantedBy = lib.mkForce [ ];
