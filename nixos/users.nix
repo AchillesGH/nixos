@@ -6,12 +6,13 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "networkmanager"
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
     ];
-    hashedPassword = "$6$.rLQXqMF5UHsOGlJ$9rP8/OTsRrpat3F57iaRAW4Tl35/DNUbZqBalx/SKbjCn6jcxpW/xObOYZRxr/m1jirr2XVb1J7H6D.5Xk1dF1";
+    hashedPassword = "$6$8mII7NYdBqukFrvZ$cN7yN.bMfPti32xHys9nH3Nby5O8JTkeLNsiVVxZlcDZEg1d7BEadu3EJo9hfjGNLvHeBPyxSadIF96UPT9IP.";
   };
   users.users.confman = {
     isNormalUser = true;
