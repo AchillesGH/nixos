@@ -154,6 +154,14 @@
     }
 
     {
+      users = [ "confman" ];
+      cmd = "nix-store";
+      args = [ "--optimise" ];
+      keepEnv = false;
+      noPass = true;
+    }
+
+    {
       users = [ "achilles" ];
       runAs = "prisoner";
       noPass = true;
