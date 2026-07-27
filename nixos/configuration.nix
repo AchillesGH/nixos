@@ -24,7 +24,6 @@
     ./fonts.nix
     ./users.nix
     ./greetd.nix
-    ./sandboxing.nix
   ];
   sops = {
     defaultSopsFile = ../secrets.yaml;
