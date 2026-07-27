@@ -33,6 +33,7 @@
     apksigner
     kdePackages.qt6ct
     protonup-qt
+    papers
     ripgrep-all
     libsForQt5.qt5ct
     vscodium
