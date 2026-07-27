@@ -8,10 +8,12 @@
       "wheel"
       "networkmanager"
     ];
+    uid = 1000;
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
     ];
+    home = "/home/achilles";
     hashedPassword = "$6$8mII7NYdBqukFrvZ$cN7yN.bMfPti32xHys9nH3Nby5O8JTkeLNsiVVxZlcDZEg1d7BEadu3EJo9hfjGNLvHeBPyxSadIF96UPT9IP.";
   };
   users.users.confman = {
