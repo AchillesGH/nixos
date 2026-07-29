@@ -71,6 +71,17 @@
     android-studio
     clang-tools
     clang
+    (pkgs.octaveFull.withPackages (
+      ps: with ps; [
+        control
+        signal
+        symbolic
+        image
+        statistics
+        optim
+      ]
+    ))
+
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
