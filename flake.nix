@@ -2,7 +2,6 @@
   description = "Nix flake";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +33,6 @@
       home-manager,
       stylix,
       lanzaboote,
-      nix-cachyos-kernel,
       zen-browser,
       sops-nix,
       nixpak,
@@ -54,16 +52,6 @@
         inherit system;
         specialArgs = { inherit inputs mkNixPak; };
         modules = [
-
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = [
-                nix-cachyos-kernel.overlays.pinned
-              ];
-              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-            }
-          )
           sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager

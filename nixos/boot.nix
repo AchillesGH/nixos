@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "zswap.enabled=1" # enables zswap
     "zswap.compressor=zstd" # compression algorithm
