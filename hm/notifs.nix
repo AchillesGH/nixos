@@ -104,7 +104,6 @@
 
   # Ensure icon theme packages are present in the user environment
   home.packages = with pkgs; [
-    gnome-icon-theme
     papirus-icon-theme
   ];
 }
