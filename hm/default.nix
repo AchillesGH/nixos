@@ -5,7 +5,9 @@
   osConfig,
   ...
 }:
-
+let
+  imv = "org.gnome.eog.desktop";
+in
 {
   home.username = "achilles";
   home.homeDirectory = "/home/achilles";
@@ -322,16 +324,16 @@
       "x-scheme-handler/https" = "zen-beta.desktop";
       "x-scheme-handler/about" = "zen-beta.desktop";
       "x-scheme-handler/unknown" = "zen-beta.desktop";
-      "image/jpeg" = "org.gnome.eog.desktop";
-      "image/png" = "org.gnome.eog.desktop";
-      "image/gif" = "org.gnome.eog.desktop";
-      "image/webp" = "org.gnome.eog.desktop";
-      "image/tiff" = "org.gnome.eog.desktop";
-      "image/bmp" = "org.gnome.eog.desktop";
-      "image/svg+xml" = "org.gnome.eog.desktop";
-      "image/avif" = "org.gnome.eog.desktop";
-      "image/heic" = "org.gnome.eog.desktop";
-      "image/jxl" = "org.gnome.eog.desktop";
+      "image/jpeg" = imv;
+      "image/png" = imv;
+      "image/gif" = imv;
+      "image/webp" = imv;
+      "image/tiff" = imv;
+      "image/bmp" = imv;
+      "image/svg+xml" = imv;
+      "image/avif" = imv;
+      "image/heic" = imv;
+      "image/jxl" = imv;
 
     };
   };
