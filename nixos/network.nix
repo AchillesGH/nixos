@@ -26,7 +26,7 @@
   services.resolved.enable = true;
   services.resolved.settings.Resolve = {
     DNSSEC = "yes";
-    Domains = [ "~." ];
+    # Domains = [ "~." ];
     DNSOverTLS = "yes";
     LLMNR = false;
     MulticastDNS = false;
