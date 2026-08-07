@@ -84,7 +84,6 @@
     parted
     stylua
     vulnix
-    kernel-hardening-checker
     gpg-tui
     (ffmpeg-full.override {
       withUnfree = true;
