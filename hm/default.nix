@@ -78,7 +78,7 @@ in
         optim
       ]
     ))
-
+    moodle-dl
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
