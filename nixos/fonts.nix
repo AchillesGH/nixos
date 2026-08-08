@@ -49,6 +49,7 @@
     hack-font
     ibm-plex
     jetbrains-mono
+    google-fonts
 
     # OTF/TeX
     lmodern
