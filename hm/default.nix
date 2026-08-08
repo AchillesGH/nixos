@@ -24,49 +24,52 @@ in
   ];
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
-    gcr
-    pandoc
-    wl-clipboard
-    papirus-icon-theme
-    brightnessctl
-    bind
-    libreoffice-fresh
+    android-studio
     apksigner
-    kdePackages.qt6ct
-    protonup-qt
-    papers
-    ripgrep-all
-    libsForQt5.qt5ct
-    vscodium
-    nemo-with-extensions
-    nemo-preview
-    nemo-emblems
-    iwmenu
-    rofi-bluetooth
-    uutils-coreutils-noprefix
-    hyprlock
-    imagemagick
     awww
     base16-schemes
-    hyprpicker
-    rofimoji
+    bind
+    brightnessctl
+    clang
+    clang-tools
+    eog
+    exiftool
+    gcr
+    ghostscript
+    google-fonts
     grim
     grimblast
-    eog
-    vlc
+    hyprlock
+    hyprpicker
+    imagemagick
+    impala
+    iwmenu
+    kdePackages.isoimagewriter
+    kdePackages.qt6ct
+    libreoffice-fresh
+    libsForQt5.qt5ct
+    moodle-dl
+    nemo-emblems
+    nemo-preview
+    nemo-with-extensions
+    overskride
+    pandoc
+    papers
+    papirus-icon-theme
+    protonup-qt
     proton-vpn
     proton-vpn-cli
-    qalculate-qt
-    impala
-    ghostscript
-    overskride
-    qpdf
-    exiftool
     python314Packages.curl-cffi
-    kdePackages.isoimagewriter
-    android-studio
-    clang-tools
-    clang
+    qalculate-qt
+    qpdf
+    ripgrep-all
+    rofi-bluetooth
+    rofimoji
+    uutils-coreutils-noprefix
+    vlc
+    vscodium
+    wl-clipboard
+
     (pkgs.octaveFull.withPackages (
       ps: with ps; [
         control
@@ -77,7 +80,6 @@ in
         optim
       ]
     ))
-    moodle-dl
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
