@@ -35,10 +35,7 @@ in
     clang-tools
     eog
     exiftool
-    gcr
     ghostscript
-    google-fonts
-    grim
     grimblast
     hyprlock
     hyprpicker
