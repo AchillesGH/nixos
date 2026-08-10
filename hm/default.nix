@@ -35,6 +35,7 @@ in
     clang-tools
     eog
     exiftool
+    gcr
     ghostscript
     grimblast
     hyprlock
