@@ -26,8 +26,6 @@
   services.resolved.enable = true;
   services.resolved.settings.Resolve = {
     DNSSEC = "yes";
-    # Domains = [ "~." ];
-    # DNSOverTLS = "yes";
     LLMNR = false;
     MulticastDNS = false;
     FallbackDNS = false;
@@ -49,20 +47,4 @@
       configFile = "/etc/wireguard/laptop-US-FREE-85.conf";
     };
   };
-
-  /*
-    services.avahi = {
-      enable = false;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-    services.printing = {
-      enable = false;
-      drivers = with pkgs; [
-        cups-filters
-        cups-browsed
-      ];
-    };
-  */
-
 }
