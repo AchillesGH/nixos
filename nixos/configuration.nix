@@ -43,7 +43,6 @@
   nix.package = pkgs.lixPackageSets.stable.lix;
   nixpkgs.config.allowUnfree = true;
 
-  programs.ssh.startAgent = true;
   nix.settings.trusted-users = [ "confman" ];
 
   systemd.oomd.enable = true;
@@ -92,9 +91,6 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 40;
   };
-
-  programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-qt;
 
   nix.settings.experimental-features = [
     "nix-command"
