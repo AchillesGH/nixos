@@ -310,23 +310,14 @@ in
 
   };
 
-  programs.ssh.matchBlocks."codeberg.org" = {
-    identityFile = "~/.ssh/id_ed25519";
-    user = "git";
-  };
-
   programs.git = {
     enable = true;
     settings.user.name = "achillesgh";
     settings.user.email = "achillesgh@proton.me";
-
     signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVvSiGN3cYS8/Lgfnrc+jjxkx4XeG5VKDQSf7zfXQxY achillesgh@proton.me"; # contents of your .pub file
+      key = "39401C866F3B879FDC6CA2A39CB1383F1B41B400";
       signByDefault = true;
-    };
-    settings = {
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      format = "openpgp";
     };
   };
   programs.quickshell = {
