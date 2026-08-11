@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   xdg.configFile = {
-    #     "nvim/after".source = ./lua/after;
     "nvim/plugin".source = ./lua/plugin;
   };
 
@@ -9,6 +8,7 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       lualine-nvim
       nvim-tree-lua
@@ -21,9 +21,7 @@
       rust-analyzer
       asm-lsp
     ];
-    extraConfig = ''
-      set number relativenumber
-    '';
+    extraLuaConfig = builtins.readFile ./lua/init.lua;
   };
 
 }
