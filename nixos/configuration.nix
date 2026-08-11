@@ -129,4 +129,7 @@
 
   programs.fuse.enable = true; # for xdg-desktop-porta-gtk
 
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.enableSSHSupport = true;
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-qt;
 }
