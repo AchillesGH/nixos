@@ -25,7 +25,7 @@
 
   services.resolved.enable = true;
   services.resolved.settings.Resolve = {
-    DNSSEC = "yes";
+    DNSSEC = "allow-downgrade";
     LLMNR = false;
     MulticastDNS = false;
     FallbackDNS = false;
