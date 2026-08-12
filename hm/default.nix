@@ -61,6 +61,7 @@ in
     python314Packages.curl-cffi
     qalculate-qt
     qpdf
+    qrtool
     ripgrep-all
     rofi-bluetooth
     rofimoji
