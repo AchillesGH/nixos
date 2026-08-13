@@ -271,7 +271,7 @@ in
   #};
 
   stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   stylix.polarity = "dark";
   stylix.targets.gtksourceview.colors.enable = false;
   stylix.overlays.enable = false;
@@ -282,7 +282,7 @@ in
   stylix.targets.zen-browser.enable = false;
   stylix.targets.btop.enable = true;
   stylix.targets.qt.enable = true;
-  stylix.image = ./neon_shallows.jxl;
+  stylix.image = ./neon_shallows.png;
   stylix.fonts = {
     serif = {
       name = "serif";
