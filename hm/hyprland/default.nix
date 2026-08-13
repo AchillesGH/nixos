@@ -66,9 +66,10 @@
       hl.permission({ binary = "${lib.getExe pkgs.grimblast}", type = "screencopy", mode = "allow" })
       hl.permission({ binary = "${lib.getExe config.programs.hyprlock.package}", type = "screencopy", mode = "allow" })
       hl.permission({ binary = "${config.wayland.windowManager.hyprland.finalPortalPackage}/libexec/.xdg-desktop-portal-hyprland-wrapped", type = "screencopy", mode = "allow" })
+      hl.permission({ binary = "${pkgs.hyprlandPlugins.hypr-dynamic-cursors}/lib/libhypr-dynamic-cursors.so", type = "plugin", mode = "allow"})
     '';
     plugins = [
-      #  pkgs.hyprlandPlugins.hypr-dynamic-cursors
+      pkgs.hyprlandPlugins.hypr-dynamic-cursors
     ];
   };
 
