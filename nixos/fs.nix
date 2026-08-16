@@ -35,6 +35,43 @@ in
     ]
     ++ standardOpts;
   };
+
+  fileSystems."/home/achilles/Downloads" = {
+    device = "/mnt/data/UserData/Downloads";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/home/achilles/Documents" = {
+    device = "/mnt/data/UserData/Documents";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/home/achilles/Pictures" = {
+    device = "/mnt/data/UserData/Pictures";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/home/achilles/Videos" = {
+    device = "/mnt/data/UserData/Videos";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/home/achilles/Music" = {
+    device = "/mnt/data/UserData/Music";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/boot".options = [
+    "noexec"
+    "nosuid"
+    "nodev"
+  ];
+
   boot.resumeDevice = "/dev/disk/by-label/swap";
   swapDevices = [
     {
