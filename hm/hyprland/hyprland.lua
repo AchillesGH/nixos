@@ -234,12 +234,3 @@ hl.window_rule({
 
 	no_focus = true,
 })
-
-hl.config({
-	plugin = {
-		dynamic_cursors = {
-			enabled = true,
-			mode = "none",
-		},
-	},
-})
