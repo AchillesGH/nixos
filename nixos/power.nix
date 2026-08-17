@@ -2,9 +2,10 @@
 {
   services.upower.enable = true;
   services.thermald.enable = true;
-  services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
+    pd.enable = true;
+
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -22,14 +23,23 @@
 
       INTEL_GPU_POWER_PROFILE_ON_AC = "base";
       INTEL_GPU_POWER_PROFILE_ON_BAT = "power_saving";
+      INTEL_GPU_BOOST_FREQ_ON_AC = 1300;
 
       INTEL_GPU_MIN_FREQ_ON_AC = 300;
       INTEL_GPU_MAX_FREQ_ON_AC = 1300;
 
       INTEL_GPU_MIN_FREQ_ON_BAT = 300;
       INTEL_GPU_MAX_FREQ_ON_BAT = 600;
-
+      INTEL_GPU_BOOST_FREQ_ON_BAT = 600;
     };
   };
-
+  security.doas.extraRules = [
+    {
+      users = [ "confman" ];
+      noPass = true;
+      keepEnv = false;
+      cmd = "tlp-stat";
+      args = [ "-g" ];
+    }
+  ];
 }
