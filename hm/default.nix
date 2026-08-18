@@ -53,7 +53,6 @@ in
     nemo-with-extensions
     overskride
     pandoc
-    papers
     papirus-icon-theme
     protonup-qt
     proton-vpn
@@ -202,7 +201,7 @@ in
       "inode/directory" = [ "nemo.desktop" ];
       "application/x-gnome-saved-search" = [ "nemo.desktop" ];
       "text/html" = "zen-beta.desktop";
-      "application/pdf" = "org.gnome.Papers.desktop";
+      "application/pdf" = "chromium-browser.desktop";
       "x-scheme-handler/http" = "zen-beta.desktop";
       "x-scheme-handler/https" = "zen-beta.desktop";
       "x-scheme-handler/about" = "zen-beta.desktop";

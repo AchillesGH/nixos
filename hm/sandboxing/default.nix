@@ -130,20 +130,6 @@ in
 
     (
       mkFFBrowserSandbox {
-        package = config.programs.chromium.finalPackage;
-        appId = "org.chromium.Chromium";
-        folder = "chromium";
-        extraDbusPolicies = {
-          "org.freedesktop.secrets" = "talk";
-        };
-      }
-      // {
-        meta.priority = -1;
-      }
-    )
-
-    (
-      mkFFBrowserSandbox {
         package = config.programs.brave.finalPackage;
         appId = "com.brave.Browser";
         folder = "BraveSoftware";
