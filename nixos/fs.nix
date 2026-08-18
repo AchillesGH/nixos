@@ -8,6 +8,14 @@ let
     "ssd"
     "discard=async"
   ];
+  dbMountOptions = [
+    "ro"
+    "x-gvfs-hide"
+    # Resolves symlinks as if they were real files
+    # Needed for things like OnlyOffice
+    "resolve-symlinks"
+  ];
+
 in
 {
   environment.etc."crypttab" = {
@@ -66,11 +74,38 @@ in
     options = [ "bind" ];
   };
 
+  systemd.tmpfiles.rules = [
+    "d /common 0770 achilles sharedfiles - -"
+  ];
+
   fileSystems."/boot".options = [
     "noexec"
     "nosuid"
     "nodev"
   ];
+
+  # Fix/workaround for distrobox access to host themes from wiki
+  system.fsPackages = [ pkgs.bindfs ];
+  fileSystems."/usr/share/fonts" = {
+    device = "/run/current-system/sw/share/X11/fonts";
+    fsType = "fuse.bindfs";
+    options = dbMountOptions;
+  };
+
+  # Icons
+  fileSystems."/usr/share/icons" = {
+    device = "/run/current-system/sw/share/icons";
+    fsType = "fuse.bindfs";
+    options = dbMountOptions;
+
+  };
+
+  # Themes
+  fileSystems."/usr/share/themes" = {
+    device = "/run/current-system/sw/share/themes";
+    fsType = "fuse.bindfs";
+    options = dbMountOptions;
+  };
 
   boot.resumeDevice = "/dev/disk/by-label/swap";
   swapDevices = [

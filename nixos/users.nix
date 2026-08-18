@@ -59,6 +59,15 @@
     ];
     packages = with pkgs; [
       flatpak
+      chromium
+      unzip
+    ];
+  };
+
+  users.groups.sharedfiles = {
+    members = [
+      "achilles"
+      "prisoner"
     ];
   };
 }

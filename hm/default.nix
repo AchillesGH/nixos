@@ -263,7 +263,7 @@ in
   #};
 
   stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/circus.yaml";
   stylix.polarity = "dark";
   stylix.targets.gtksourceview.colors.enable = false;
   stylix.overlays.enable = false;

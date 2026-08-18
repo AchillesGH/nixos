@@ -67,4 +67,5 @@
     adwaita-fonts
     maple-mono.variable
   ];
+  fonts.fontDir.enable = true;
 }
