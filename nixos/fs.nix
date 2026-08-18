@@ -75,7 +75,8 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d /common 0770 achilles sharedfiles - -"
+    "d /home/shared 0770 achilles sharedfiles - -"
+    "d /mnt/data 0700 achilles users"
   ];
 
   fileSystems."/boot".options = [
