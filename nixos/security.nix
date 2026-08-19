@@ -9,7 +9,7 @@
     "debugfs=off"
   ];
   boot.kexec.enable = false;
-  environment.memoryAllocator.provider = "graphene-hardened-light";
+  #  environment.memoryAllocator.provider = "graphene-hardened-light";
 
   boot.blacklistedKernelModules = [
     # Obscure network protocols
