@@ -17,7 +17,7 @@
   networking.wireless.iwd.settings = {
     General = {
       EnableNetworkConfiguration = false;
-      AddressRandomization = "once";
+      AddressRandomization = "network";
       AddressRandomizationRange = "full";
       Country = "IN";
     };
