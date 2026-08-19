@@ -6,7 +6,7 @@
   ...
 }:
 let
-  imv = "org.gnome.eog.desktop";
+  imv = "org.gnome.Loupe.desktop";
 in
 {
   home.username = "achilles";
@@ -33,7 +33,7 @@ in
     brightnessctl
     clang
     clang-tools
-    eog
+    loupe
     exiftool
     gcr
     ghostscript
