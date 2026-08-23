@@ -1,7 +1,21 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   security.forcePageTableIsolation = true;
   security.pam.services.su.requireWheel = true;
+  security.pam.services.hyprlock = {
+    googleAuthenticator.enable = true;
+    rules.auth.google_authenticator = {
+      control = lib.mkForce "sufficient";
+      order = config.security.pam.services.hyprlock.rules.auth.unix.order + 10;
+      args = [ "try_first_pass" ];
+    };
+  };
+
   boot.kernelParams = [
     "slab_nomerge"
     "page_poison=1"
