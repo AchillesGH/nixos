@@ -22,10 +22,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpak = {
-      url = "github:nixpak/nixpak";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     inputs@{
@@ -35,22 +31,17 @@
       lanzaboote,
       zen-browser,
       sops-nix,
-      nixpak,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      mkNixPak = nixpak.lib.nixpak {
-        inherit (pkgs) lib;
-        inherit pkgs;
-      };
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 
         inherit system;
-        specialArgs = { inherit inputs mkNixPak; };
+        specialArgs = { inherit inputs; };
         modules = [
           sops-nix.nixosModules.sops
           lanzaboote.nixosModules.lanzaboote
@@ -58,7 +49,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs mkNixPak; };
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.startAsUserService = true;
             home-manager.sharedModules = [ ];
             home-manager.users.achilles = ./hm;

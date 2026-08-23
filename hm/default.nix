@@ -21,7 +21,6 @@ in
     ./notifs.nix
     ./browsers.nix
     ./user_shell.nix
-    ./sandboxing
   ];
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
@@ -113,8 +112,7 @@ in
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
-    # package = inputs.zen-browser.packages.${pkgs.system}.beta;
-    package = null;
+    package = inputs.zen-browser.packages.${pkgs.system}.beta;
   };
 
   programs.eza = {
