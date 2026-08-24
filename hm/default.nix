@@ -185,8 +185,6 @@ in
   '';
   programs.btop.enable = true;
 
-  services.kdeconnect.enable = true;
-  services.kdeconnect.indicator = true;
   home.pointerCursor = {
     gtk.enable = true;
     enable = true;
