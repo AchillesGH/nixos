@@ -64,7 +64,7 @@
   services.fwupd.enable = true;
   services.scx = {
     enable = true;
-    scheduler = "scx_lavd";
+    scheduler = "scx_bpfland";
     extraArgs = [
       "--autopower"
     ];
