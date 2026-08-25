@@ -48,11 +48,4 @@
     allowedTCPPortRanges = lib.mkForce [ ];
     allowedUDPPortRanges = lib.mkForce [ ];
   };
-
-  networking.wg-quick.interfaces = {
-    proton-us = {
-      autostart = false;
-      configFile = "/etc/wireguard/laptop-US-FREE-85.conf";
-    };
-  };
 }
