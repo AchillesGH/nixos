@@ -65,9 +65,6 @@
   services.scx = {
     enable = true;
     scheduler = "scx_bpfland";
-    extraArgs = [
-      "--autopower"
-    ];
   };
 
   environment.systemPackages = with pkgs; [
