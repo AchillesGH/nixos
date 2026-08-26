@@ -87,7 +87,7 @@
     })
   ];
   boot.kernel.sysctl = {
-    "vm.swappiness" = 40;
+    "vm.swappiness" = 90;
   };
 
   nix.settings.experimental-features = [
