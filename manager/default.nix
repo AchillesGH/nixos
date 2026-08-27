@@ -6,7 +6,22 @@
   home.stateVersion = "26.11";
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+
+    enableDefaultConfig = false;
+
+    settings."*" = {
+      AddKeysToAgent = "yes";
+      Compression = "no";
+      ControlMaster = "no";
+      ControlPath = "~/.ssh/master-%r@%n:%p";
+      ControlPersist = "no";
+      ForwardAgent = "no";
+      HashKnownHosts = "no";
+      ServerAliveCountMax = 3;
+      ServerAliveInterval = 0;
+      UserKnownHostsFile = "~/.ssh/known_hosts";
+    };
+
   };
   programs.git = {
     enable = true;

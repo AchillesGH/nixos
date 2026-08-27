@@ -22,10 +22,11 @@
     oci-containers.backend = "podman";
     podman = {
       enable = true;
-      enableNvidia = true;
       dockerCompat = true;
     };
   };
+
+  hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     docker-compose

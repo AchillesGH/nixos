@@ -41,10 +41,9 @@ in
     hyprpicker
     imagemagick
     impala
-    iwmenu
     kdePackages.isoimagewriter
     kdePackages.qt6ct
-    libreoffice-fresh
+    libreoffice-stable
     libsForQt5.qt5ct
     moodle-dl
     nemo-emblems
@@ -112,7 +111,7 @@ in
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
-    package = inputs.zen-browser.packages.${pkgs.system}.beta;
+    package = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.beta;
   };
 
   programs.eza = {

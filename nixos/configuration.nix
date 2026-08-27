@@ -79,7 +79,6 @@
     android-tools
     parted
     stylua
-    vulnix
     google-authenticator
     gpg-tui
     (ffmpeg-full.override {
