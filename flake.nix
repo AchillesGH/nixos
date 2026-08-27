@@ -52,8 +52,8 @@
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.startAsUserService = true;
             home-manager.sharedModules = [ ];
-            home-manager.users.achilles = ./hm;
-            home-manager.users.confman = ./manager;
+            home-manager.users.achilles = ./hm/achilles;
+            home-manager.users.confman = ./hm/manager;
             environment.pathsToLink = [
               "/share/applications"
               "/share/xdg-desktop-portal"
