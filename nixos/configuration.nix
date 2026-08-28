@@ -70,7 +70,6 @@
     wget
     sbctl
     git
-    nixfmt
     alejandra
     usbutils
     tzdata
