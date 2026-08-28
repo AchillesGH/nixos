@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -7,5 +10,4 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
 }

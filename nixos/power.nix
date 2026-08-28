@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.upower.enable = true;
   services.thermald.enable = true;
   services.tlp = {
@@ -35,11 +34,11 @@
   };
   security.doas.extraRules = [
     {
-      users = [ "confman" ];
+      users = ["confman"];
       noPass = true;
       keepEnv = false;
       cmd = "tlp-stat";
-      args = [ "-g" ];
+      args = ["-g"];
     }
   ];
 }

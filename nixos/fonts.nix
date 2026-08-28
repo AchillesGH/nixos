@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      sansSerif = [ "Adwaita Sans" ];
-      serif = [ "Roboto Serif" ];
+      sansSerif = ["Adwaita Sans"];
+      serif = ["Roboto Serif"];
       monospace = [
         "Maple Mono"
         "Symbols Nerd Font Mono"

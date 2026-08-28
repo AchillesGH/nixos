@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.dunst = {
     enable = true;
 
@@ -43,16 +41,16 @@
         min_icon_size = 0;
         max_icon_size = 32;
         /*
-          icon_path =
-          let
-            gnome = "${pkgs.gnome-icon-theme}/share/icons/gnome";
-            papirus = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
-          in
-          "${gnome}/16x16/status/:${gnome}/16x16/devices/"
-          + ":${papirus}/48x48/actions/:${papirus}/48x48/apps/"
-          + ":${papirus}/48x48/devices/:${papirus}/48x48/emblems/"
-          + ":${papirus}/48x48/emotes/:${papirus}/48x48/mimetypes/"
-          + ":${papirus}/48x48/places/:${papirus}/48x48/status/";
+        icon_path =
+        let
+          gnome = "${pkgs.gnome-icon-theme}/share/icons/gnome";
+          papirus = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
+        in
+        "${gnome}/16x16/status/:${gnome}/16x16/devices/"
+        + ":${papirus}/48x48/actions/:${papirus}/48x48/apps/"
+        + ":${papirus}/48x48/devices/:${papirus}/48x48/emblems/"
+        + ":${papirus}/48x48/emotes/:${papirus}/48x48/mimetypes/"
+        + ":${papirus}/48x48/places/:${papirus}/48x48/status/";
         */
         sticky_history = true;
         history_length = 20;

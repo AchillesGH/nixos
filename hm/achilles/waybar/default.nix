@@ -168,29 +168,29 @@ _: {
           interval = 5;
         };
         /*
-          mpris = {
-            dynamic-order = [
-              "title"
-              "album"
-              "artist"
-              "position"
-              "length"
-            ];
-            format = "{player_icon} {dynamic}";
-            format-paused = "{player_icon} <i>{dynamic}</i>";
-            interval = 1;
-            max-length = 80;
-            player-icons = {
-              default = "";
-              firefox = "󰈹";
-              mpv = "";
-            };
-            status-icons = {
-              paused = "󰐊";
-              playing = "󰏤";
-              stopped = "󰓛";
-            };
+        mpris = {
+          dynamic-order = [
+            "title"
+            "album"
+            "artist"
+            "position"
+            "length"
+          ];
+          format = "{player_icon} {dynamic}";
+          format-paused = "{player_icon} <i>{dynamic}</i>";
+          interval = 1;
+          max-length = 80;
+          player-icons = {
+            default = "";
+            firefox = "󰈹";
+            mpv = "";
           };
+          status-icons = {
+            paused = "󰐊";
+            playing = "󰏤";
+            stopped = "󰓛";
+          };
+        };
         */
         network = {
           format = "󰤮 Off";

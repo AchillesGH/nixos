@@ -4,11 +4,9 @@
   pkgs,
   osConfig,
   ...
-}:
-let
+}: let
   imv = "org.gnome.Loupe.desktop";
-in
-{
+in {
   home.username = "achilles";
   home.homeDirectory = "/home/achilles";
   imports = [
@@ -68,14 +66,15 @@ in
     wl-clipboard
 
     (pkgs.octaveFull.withPackages (
-      ps: with ps; [
-        control
-        signal
-        symbolic
-        image
-        statistics
-        optim
-      ]
+      ps:
+        with ps; [
+          control
+          signal
+          symbolic
+          image
+          statistics
+          optim
+        ]
     ))
   ];
   programs.obs-studio.enable = true;
@@ -94,7 +93,6 @@ in
 
   services.pipewire.enable = true;
   services.pipewire.pulseConfigs = {
-
     "pulse-server" = {
       "pulse.properties" = {
         "server.address" = [
@@ -103,7 +101,6 @@ in
         ];
       };
     };
-
   };
 
   programs.yt-dlp.enable = true;
@@ -201,8 +198,8 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = [ "nemo.desktop" ];
-      "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+      "inode/directory" = ["nemo.desktop"];
+      "application/x-gnome-saved-search" = ["nemo.desktop"];
       "text/html" = "zen-beta.desktop";
       "application/pdf" = "chromium-browser.desktop";
       "x-scheme-handler/http" = "zen-beta.desktop";
@@ -219,7 +216,6 @@ in
       "image/avif" = imv;
       "image/heic" = imv;
       "image/jxl" = imv;
-
     };
   };
   dconf = {
@@ -303,7 +299,6 @@ in
       desktop = 1.0;
       popups = 1.0;
     };
-
   };
 
   programs.git = {

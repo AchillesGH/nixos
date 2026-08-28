@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   boot.extraModprobeConfig = "options cfg80211 ieee80211_regdom=IN";
   hardware.wirelessRegulatoryDatabase = true;
   networking.hostName = "nixos";
@@ -39,13 +38,13 @@
       DNS=2a07:a8c1::#${config.sops.placeholder.nextdns}.dns.nextdns.io
     '';
     path = "/etc/systemd/resolved.conf.d/dns.conf";
-    restartUnits = [ "systemd-resolved.service" ];
+    restartUnits = ["systemd-resolved.service"];
     mode = "0444";
   };
 
   networking.firewall = rec {
     enable = true;
-    allowedTCPPortRanges = lib.mkForce [ ];
-    allowedUDPPortRanges = lib.mkForce [ ];
+    allowedTCPPortRanges = lib.mkForce [];
+    allowedUDPPortRanges = lib.mkForce [];
   };
 }

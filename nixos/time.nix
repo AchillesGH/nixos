@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   time = {
     timeZone = "Asia/Kolkata";
   };
@@ -11,7 +10,7 @@
     chrony = {
       enable = true;
       enableNTS = true;
-      extraFlags = [ "-F1" ];
+      extraFlags = ["-F1"];
       extraConfig = ''
         minsources 3
         authselectmode prefer

@@ -3,8 +3,7 @@
   lib,
   config,
   ...
-}:
-{
+}: {
   security.forcePageTableIsolation = true;
   security.pam.services.su.requireWheel = true;
   security.pam.services.hyprlock = {
@@ -12,7 +11,7 @@
     rules.auth.google_authenticator = {
       control = lib.mkForce "sufficient";
       order = config.security.pam.services.hyprlock.rules.auth.unix.order + 10;
-      args = [ "try_first_pass" ];
+      args = ["try_first_pass"];
     };
   };
 
@@ -146,37 +145,37 @@
       noPass = false;
     }
     {
-      users = [ "confman" ];
+      users = ["confman"];
       cmd = "sysrbb-cmd";
       keepEnv = false;
       noPass = true;
     }
 
     {
-      users = [ "confman" ];
+      users = ["confman"];
       cmd = "sysrbs-cmd";
       keepEnv = false;
       noPass = true;
     }
 
     {
-      users = [ "confman" ];
+      users = ["confman"];
       cmd = "nix-collect-garbage";
-      args = [ "-d" ];
+      args = ["-d"];
       keepEnv = false;
       noPass = true;
     }
 
     {
-      users = [ "confman" ];
+      users = ["confman"];
       cmd = "nix-store";
-      args = [ "--optimise" ];
+      args = ["--optimise"];
       keepEnv = false;
       noPass = true;
     }
 
     {
-      users = [ "achilles" ];
+      users = ["achilles"];
       runAs = "prisoner";
       noPass = true;
       keepEnv = false;

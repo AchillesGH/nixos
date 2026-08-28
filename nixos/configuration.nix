@@ -4,9 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
@@ -30,7 +28,7 @@
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     useTmpfs = true;
     secrets = {
-      nextdns = { };
+      nextdns = {};
     };
   };
 
@@ -43,7 +41,7 @@
   nix.package = pkgs.lixPackageSets.stable.lix;
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.trusted-users = [ "confman" ];
+  nix.settings.trusted-users = ["confman"];
 
   systemd.oomd.enable = true;
   programs.fish.enable = true;
@@ -73,6 +71,7 @@
     sbctl
     git
     nixfmt
+    alejandra
     usbutils
     tzdata
     packet
@@ -100,16 +99,16 @@
   system.stateVersion = "26.11";
 
   /*
-    services.syncthing = {
-      enable = true;
-      user = "achilles";
-      dataDir = "/home/achilles/Backups/GrapheneOS";
-      openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
-    };
+  services.syncthing = {
+    enable = true;
+    user = "achilles";
+    dataDir = "/home/achilles/Backups/GrapheneOS";
+    openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
+  };
   */
   systemd.services.syncthing.unitConfig = {
-    after = [ "graphical.target" ];
-    wantedBy = lib.mkForce [ ];
+    after = ["graphical.target"];
+    wantedBy = lib.mkForce [];
   };
 
   programs.dconf.enable = true;

@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   stylix.targets.rofi.enable = false;
   programs.rofi = {
     enable = true;
@@ -34,5 +37,4 @@
       steal-focus = true;
     };
   };
-
 }

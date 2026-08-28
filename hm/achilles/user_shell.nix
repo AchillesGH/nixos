@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -101,11 +100,11 @@
 
       modules = [
         /*
-          {
-            type = "title";
-            keyWidth = 10;
-            key = "User";
-          }
+        {
+          type = "title";
+          keyWidth = 10;
+          key = "User";
+        }
         */
         {
           type = "os";

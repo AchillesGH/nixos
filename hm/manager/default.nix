@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.username = "confman";
   home.homeDirectory = "/home/confman";
   home.stateVersion = "26.11";
@@ -21,7 +23,6 @@
       ServerAliveInterval = 0;
       UserKnownHostsFile = "~/.ssh/known_hosts";
     };
-
   };
   programs.git = {
     enable = true;

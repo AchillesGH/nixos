@@ -23,46 +23,40 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    inputs@{
-      nixpkgs,
-      home-manager,
-      stylix,
-      lanzaboote,
-      zen-browser,
-      sops-nix,
-      ...
-    }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          sops-nix.nixosModules.sops
-          lanzaboote.nixosModules.lanzaboote
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.startAsUserService = true;
-            home-manager.sharedModules = [ ];
-            home-manager.users.achilles = ./hm/achilles;
-            home-manager.users.confman = ./hm/manager;
-            environment.pathsToLink = [
-              "/share/applications"
-              "/share/xdg-desktop-portal"
-            ];
-          }
-          ./nixos/configuration.nix
-
-        ];
-      };
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    stylix,
+    lanzaboote,
+    zen-browser,
+    sops-nix,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit inputs;};
+      modules = [
+        sops-nix.nixosModules.sops
+        lanzaboote.nixosModules.lanzaboote
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.startAsUserService = true;
+          home-manager.sharedModules = [];
+          home-manager.users.achilles = ./hm/achilles;
+          home-manager.users.confman = ./hm/manager;
+          environment.pathsToLink = [
+            "/share/applications"
+            "/share/xdg-desktop-portal"
+          ];
+        }
+        ./nixos/configuration.nix
+      ];
     };
-
+  };
 }

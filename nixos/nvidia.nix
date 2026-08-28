@@ -1,10 +1,9 @@
-{ ... }: {
+{...}: {
   services.xserver.videoDrivers = [
     "nvidia"
   ];
 
   hardware.nvidia = {
-
     # Using non-free driver since disabling GSP firmware on open-source
     # drivers has no effect.
     open = false;

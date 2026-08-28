@@ -3,9 +3,7 @@
   config,
   pkgs,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hypridle.nix
   ];
@@ -13,7 +11,7 @@
   services.cliphist = {
     enable = true;
 
-    systemdTargets = [ "graphical-session.target" ];
+    systemdTargets = ["graphical-session.target"];
 
     extraOptions = [
       "-max-dedupe-search"
@@ -22,7 +20,6 @@
       "500"
     ];
     allowImages = true;
-
   };
 
   services.hyprpaper = {
@@ -48,7 +45,7 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   wayland.windowManager.hyprland = {
@@ -69,6 +66,5 @@
     '';
   };
 
-  xdg.configFile."uwsm/env".source =
-    "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
 }
