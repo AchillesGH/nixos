@@ -15,6 +15,7 @@
       fixed-num-lines = false;
       show-icons = true;
       terminal = "kitty";
+      run-command = "uwsm app -- {cmd}";
       run-shell-command = "uwsm app -- {terminal} -1e sh -c {cmd}";
       drun-url-launcher = "xdg-open";
       disable-history = false;
