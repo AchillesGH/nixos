@@ -79,9 +79,7 @@
     stylua
     google-authenticator
     gpg-tui
-    (ffmpeg-full.override {
-      withUnfree = true;
-    })
+    ffmpeg-full
   ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 90;
