@@ -41,7 +41,6 @@ in {
     impala
     kdePackages.isoimagewriter
     kdePackages.qt6ct
-    libreoffice-stable
     libsForQt5.qt5ct
     moodle-dl
     nemo-emblems
