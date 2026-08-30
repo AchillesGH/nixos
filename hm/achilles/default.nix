@@ -52,7 +52,6 @@ in {
     papirus-icon-theme
     protonup-qt
     proton-vpn
-    proton-vpn-cli
     python314Packages.curl-cffi
     qalculate-qt
     qpdf
@@ -64,18 +63,6 @@ in {
     vlc
     vscodium
     wl-clipboard
-
-    (pkgs.octaveFull.withPackages (
-      ps:
-        with ps; [
-          control
-          signal
-          symbolic
-          image
-          statistics
-          optim
-        ]
-    ))
   ];
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
@@ -313,5 +300,34 @@ in {
   };
   programs.quickshell = {
     enable = true;
+  };
+
+  services.emacs = {
+    enable = true;
+    defaultEditor = true;
+  };
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+    extraPackages = epkgs: [
+      epkgs.nix-mode
+      epkgs.nixfmt
+      epkgs.company
+      epkgs.lsp-mode
+      epkgs.lsp-ui
+    ];
+    extraConfig = ''
+        (setq standard-indent 2)
+
+      (require 'lsp-mode)
+      (require 'lsp-ui)
+      (add-hook 'c-mode-hook 'lsp)
+      (add-hook 'c++-mode-hook 'lsp)
+      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      (add-hook 'prog-mode-hook 'company-mode)
+
+      (setq lsp-ui-doc-enable t)
+      (setq lsp-ui-sideline-enable t)
+    '';
   };
 }
