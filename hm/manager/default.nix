@@ -24,6 +24,7 @@
       UserKnownHostsFile = "~/.ssh/known_hosts";
     };
   };
+
   programs.git = {
     enable = true;
     settings = {
@@ -35,21 +36,21 @@
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFusnqYKJXGm7nIG7iyIOW/zSjUbH7y8lsVHB4DOv8qT achillesgh@proton.me";
       signByDefault = true;
     };
-
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-        side-by-side = true;
-        syntax-theme = "Nord";
-      };
-    };
-
     settings = {
       gpg = {
         format = "ssh";
       };
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      side-by-side = true;
+      syntax-theme = "Nord";
     };
   };
 }
