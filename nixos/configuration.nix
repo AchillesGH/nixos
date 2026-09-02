@@ -29,6 +29,7 @@
     useTmpfs = true;
     secrets = {
       nextdns = {};
+      nextdns_stamp = {};
     };
   };
 
