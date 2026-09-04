@@ -10,7 +10,7 @@ in {
   home.username = "achilles";
   home.homeDirectory = "/home/achilles";
   imports = [
-    inputs.zen-browser.homeModules.beta
+    inputs.zen-browser.homeModules.twilight-official
     inputs.stylix.homeModules.stylix
     ./hyprland
     ./waybar
@@ -94,8 +94,8 @@ in {
   programs.direnv.enable = true;
   programs.zen-browser = {
     enable = true;
-    setAsDefaultBrowser = true;
-    package = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.beta;
+    # setAsDefaultBrowser = true;
+    package = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight-official;
   };
 
   programs.eza = {
@@ -182,27 +182,28 @@ in {
     name = "Nemo";
     exec = "${pkgs.nemo-with-extensions}/bin/nemo";
   };
+  xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
       "inode/directory" = ["nemo.desktop"];
       "application/x-gnome-saved-search" = ["nemo.desktop"];
-      "text/html" = "zen-beta.desktop";
-      "application/pdf" = "chromium-browser.desktop";
-      "x-scheme-handler/http" = "zen-beta.desktop";
-      "x-scheme-handler/https" = "zen-beta.desktop";
-      "x-scheme-handler/about" = "zen-beta.desktop";
-      "x-scheme-handler/unknown" = "zen-beta.desktop";
-      "image/jpeg" = imv;
-      "image/png" = imv;
-      "image/gif" = imv;
-      "image/webp" = imv;
-      "image/tiff" = imv;
-      "image/bmp" = imv;
-      "image/svg+xml" = imv;
-      "image/avif" = imv;
-      "image/heic" = imv;
-      "image/jxl" = imv;
+      "text/html" = ["zen-twilight.desktop"];
+      "application/pdf" = ["chromium-browser.desktop"];
+      "x-scheme-handler/http" = ["zen-twilight.desktop"];
+      "x-scheme-handler/https" = ["zen-twilight.desktop"];
+      "x-scheme-handler/about" = ["zen-twilight.desktop"];
+      "x-scheme-handler/unknown" = ["zen-twilight.desktop"];
+      "image/jpeg" = [imv];
+      "image/png" = [imv];
+      "image/gif" = [imv];
+      "image/webp" = [imv];
+      "image/tiff" = [imv];
+      "image/bmp" = [imv];
+      "image/svg+xml" = [imv];
+      "image/avif" = [imv];
+      "image/heic" = [imv];
+      "image/jxl" = [imv];
     };
   };
   dconf = {
