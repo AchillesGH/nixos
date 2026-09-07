@@ -18,10 +18,18 @@
     # Needed for things like OnlyOffice
     "resolve-symlinks"
   ];
+  mkDataBind = name: {
+    device = "/mnt/data/UserData/${name}";
+    fsType = "none";
+    options = [
+      "bind"
+    ];
+    depends = ["/mnt/data"];
+  };
 in {
   environment.etc."crypttab" = {
     text = ''
-      data /dev/disk/by-uuid/df4a89ec-9765-415e-8986-5e559b1f4f49 /root/data.key noauto,tpm2-device=auto,discard
+      data /dev/disk/by-uuid/df4a89ec-9765-415e-8986-5e559b1f4f49 /root/data.key tpm2-device=auto,discard
     '';
   };
   fileSystems."/home".options = [
@@ -38,8 +46,6 @@ in {
     fsType = "btrfs";
     options =
       [
-        "noauto"
-        "x-systemd.automount"
         "nosuid"
         "nodev"
         "compress=zstd:3"
@@ -47,35 +53,11 @@ in {
       ++ standardOpts;
   };
 
-  fileSystems."/home/achilles/Downloads" = {
-    device = "/mnt/data/UserData/Downloads";
-    fsType = "none";
-    options = ["bind"];
-  };
-
-  fileSystems."/home/achilles/Documents" = {
-    device = "/mnt/data/UserData/Documents";
-    fsType = "none";
-    options = ["bind"];
-  };
-
-  fileSystems."/home/achilles/Pictures" = {
-    device = "/mnt/data/UserData/Pictures";
-    fsType = "none";
-    options = ["bind"];
-  };
-
-  fileSystems."/home/achilles/Videos" = {
-    device = "/mnt/data/UserData/Videos";
-    fsType = "none";
-    options = ["bind"];
-  };
-
-  fileSystems."/home/achilles/Music" = {
-    device = "/mnt/data/UserData/Music";
-    fsType = "none";
-    options = ["bind"];
-  };
+  fileSystems."/home/achilles/Downloads" = mkDataBind "Downloads";
+  fileSystems."/home/achilles/Pictures" = mkDataBind "Pictures";
+  fileSystems."/home/achilles/Documents" = mkDataBind "Documents";
+  fileSystems."/home/achilles/Videos" = mkDataBind "Videos";
+  fileSystems."/home/achilles/Music" = mkDataBind "Music";
 
   systemd.tmpfiles.rules = [
     "d /home/shared 0770 achilles sharedfiles - -"
