@@ -160,8 +160,8 @@
 
     {
       users = ["confman"];
-      cmd = "nix-collect-garbage";
-      args = ["-d"];
+      cmd = "nh";
+      args = ["clean" "all"];
       keepEnv = false;
       noPass = true;
     }
