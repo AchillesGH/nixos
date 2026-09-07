@@ -22,7 +22,6 @@ in {
   ];
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
-    android-studio
     apksigner
     awww
     base16-schemes
