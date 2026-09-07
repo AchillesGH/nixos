@@ -7,7 +7,6 @@
     "rw"
     "space_cache=v2"
     "noatime"
-    "nofail"
     "ssd"
     "discard=async"
   ];
