@@ -6,12 +6,20 @@
     "zswap.compressor=zstd" # compression algorithm
     "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
+    "quiet"
+    "rd.udev.log_level=3"
+    "rd.systemd.show_status=auto"
   ];
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
   boot.loader.timeout = 0;
+
+  boot = {
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+  };
 
   # Temporary patch for error (graceful, non-blocking) during boot
   # until I figure out what triggered it.
