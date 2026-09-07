@@ -168,8 +168,8 @@
 
     {
       users = ["confman"];
-      cmd = "nix-store";
-      args = ["--optimise"];
+      cmd = "nix";
+      args = ["store" "optimise"];
       keepEnv = false;
       noPass = true;
     }
