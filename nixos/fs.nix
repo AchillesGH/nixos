@@ -29,7 +29,7 @@ in {
   ];
   fileSystems."/nix".options =
     [
-      "compress=zstd:1"
+      "compress=zstd:3"
     ]
     ++ standardOpts;
 
@@ -42,7 +42,7 @@ in {
         "x-systemd.automount"
         "nosuid"
         "nodev"
-        "compress=zstd:2"
+        "compress=zstd:3"
       ]
       ++ standardOpts;
   };
