@@ -33,10 +33,11 @@
     };
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/confman/system";
   };
   nix.settings.auto-optimise-store = true;
   nix.package = pkgs.lixPackageSets.stable.lix;
