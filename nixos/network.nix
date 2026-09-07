@@ -33,35 +33,31 @@
   sops.templates."dnscrypt-proxy.toml" = {
     content = ''
       server_names = ['nextdns-${config.sops.placeholder."nextdns"}']
-      listen_addresses = ["127.0.0.1:53"]
-      max_clients = 250
       ipv4_servers = true
       ipv6_servers = false
-      dnscrypt_servers = true
-      doh_servers = true
-      odoh_servers = false
-      require_dnssec = false
-      require_nolog = true
-      require_nofilter = true
-      disabled_server_names = []
+
+      listen_addresses = ["127.0.0.1:53"]
+      ignore_system_dns = true
+
+      require_dnssec = true
+      require_nolog = false
+      require_nofilter = false
+
+      http3 = true
+      http3_probe = true
       force_tcp = false
       timeout = 5000
-      http3 = true
       keepalive = 30
-      log_file = "/var/log/dnscrypt-proxy/dnscrypt-proxy.log"
-      use_syslog = true
-      log_files_max_size = 10
-      log_files_max_age = 7
-      log_files_max_backups = 1
-      cert_refresh_delay = 240
-      bootstrap_resolvers = ["9.9.9.11:53", "8.8.8.8:53"]
-      ignore_system_dns = true
+
+      bootstrap_resolvers = ["9.9.9.9:9953", "1.1.1.1:53"]
+      netprobe_address = "9.9.9.9:443"
       netprobe_timeout = 60
-      netprobe_address = "9.9.9.9:53"
-      block_ipv6 = false
+
       block_unqualified = true
       block_undelegated = true
-      reject_ttl = 10
+      block_ipv6 = false
+      reject_ttl = 50
+
       cache = true
       cache_size = 4096
       cache_min_ttl = 60
@@ -69,8 +65,10 @@
       cache_neg_min_ttl = 60
       cache_neg_max_ttl = 600
 
+      use_syslog = true
+
       [static.nextdns-${config.sops.placeholder."nextdns"}]
-      stamp = '${config.sops.placeholder."nextdns_stamp"}'
+          stamp = '${config.sops.placeholder."nextdns_stamp"}'
     '';
 
     mode = "0440";
