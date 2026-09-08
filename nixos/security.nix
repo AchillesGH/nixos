@@ -195,4 +195,10 @@
       "gid=${toString config.users.groups.wheel.gid}"
     ];
   };
+
+  services.usbguard = {
+    enable = true;
+    dbus.enable = true;
+    IPCAllowedGroups = ["wheel"];
+  };
 }
