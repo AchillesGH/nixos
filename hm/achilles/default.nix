@@ -58,11 +58,26 @@ in {
     ripgrep-all
     rofi-bluetooth
     rofimoji
+    usbguard-notifier
     uutils-coreutils-noprefix
     vlc
     vscodium
     wl-clipboard
   ];
+
+  systemd.user.services.usbguard-notifier = {
+    Unit = {
+      Description = "USBGuard notifier";
+      After = ["graphical-session-pre.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.usbguard-notifier}/bin/usbguard-notifier";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
+
   programs.obs-studio.enable = true;
   programs.obs-studio.package = (
     pkgs.obs-studio.override {
