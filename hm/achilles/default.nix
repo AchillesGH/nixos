@@ -330,4 +330,9 @@ in {
       (setq lsp-ui-sideline-enable t)
     '';
   };
+
+  services.udiskie = {
+    enable = true;
+    tray = "auto";
+  };
 }
