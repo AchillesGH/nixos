@@ -1,8 +1,11 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
+  sops.secrets.main_user_pwd_hash.neededForUsers = true;
+
   users.mutableUsers = false;
   users.users.root.hashedPassword = "!"; # Disable root login
   users.users.achilles = {
@@ -18,7 +21,7 @@
       flatpak
     ];
     home = "/home/achilles";
-    hashedPassword = "$6$8mII7NYdBqukFrvZ$cN7yN.bMfPti32xHys9nH3Nby5O8JTkeLNsiVVxZlcDZEg1d7BEadu3EJo9hfjGNLvHeBPyxSadIF96UPT9IP.";
+    hashedPasswordFile = config.sops.secrets.main_user_pwd_hash.path;
   };
   users.users.confman = {
     isNormalUser = true;

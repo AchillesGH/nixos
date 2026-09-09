@@ -30,6 +30,7 @@
     secrets = {
       nextdns = {};
       nextdns_stamp = {};
+      main_user_pwd_hash = {};
     };
   };
 
