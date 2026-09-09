@@ -8,9 +8,6 @@
       "zswap.compressor=zstd" # compression algorithm
       "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
       "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
-      "quiet"
-      "rd.udev.log_level=3"
-      "rd.systemd.show_status=auto"
     ];
 
     lanzaboote = {
@@ -18,9 +15,6 @@
       pkiBundle = "/var/lib/sbctl";
     };
     loader.timeout = 0;
-
-    consoleLogLevel = 3;
-    initrd.verbose = false;
   };
 
   # Temporary patch for error (graceful, non-blocking) during boot
