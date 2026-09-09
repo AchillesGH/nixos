@@ -30,6 +30,8 @@
       INTEL_GPU_MIN_FREQ_ON_BAT = 300;
       INTEL_GPU_MAX_FREQ_ON_BAT = 600;
       INTEL_GPU_BOOST_FREQ_ON_BAT = 600;
+
+      USB_DENYLIST = "046d:c07e";
     };
   };
   security.doas.extraRules = [
