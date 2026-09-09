@@ -31,7 +31,7 @@ in {
     clang-tools
     loupe
     exiftool
-    gcr
+    gcr_4
     ghostscript
     grimblast
     hyprlock
@@ -68,14 +68,10 @@ in {
   systemd.user.services.usbguard-notifier = {
     Unit = {
       Description = "USBGuard notifier";
-      After = ["graphical-session-pre.target"];
-      PartOf = ["graphical-session.target"];
+      After = ["usbguard.target"];
     };
-    Service = {
-      ExecStart = "${pkgs.usbguard-notifier}/bin/usbguard-notifier";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = ["graphical-session.target"];
+    Service.ExecStart = "${pkgs.usbguard-notifier}/bin/usbguard-notifier";
+    Install.WantedBy = ["default.target"];
   };
 
   programs.obs-studio.enable = true;
