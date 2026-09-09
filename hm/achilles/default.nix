@@ -16,6 +16,7 @@ in {
     ./waybar
     ./rofi
     ./nvim
+    ./helix
     ./notifs.nix
     ./browsers.nix
     ./user_shell.nix

@@ -1,25 +1,35 @@
-{pkgs, config}: {
-programs.helix = {
-  enable = true;
-  settings = {
-    theme = "autumn_night_transparent";
-    editor.cursor-shape = {
-      normal = "block";
-      insert = "bar";
-      select = "underline";
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  programs.helix = {
+    enable = true;
+    settings = {
+      editor.cursor-shape = {
+        normal = "block";
+        insert = "bar";
+        select = "underline";
+      };
     };
-  };
-  languages.language = [{
-    name = "nix";
-    auto-format = true;
-    formatter.command = lib.getExe pkgs.alejandra;
-  }];
-  themes = {
-    autumn_night_transparent = {
-      "inherits" = "autumn_night";
-      "ui.background" = { };
-    };
-  };
-};
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = lib.getExe pkgs.alejandra;
+      }
+      {
+        name = "c";
+        auto-format = true;
+        formatter.command = lib.getExe' pkgs.clang-tools "clang-format";
+      }
+    ];
 
+    themes = {
+      autumn_night_transparent = {
+        "inherits" = "autumn_night";
+        "ui.background" = {};
+      };
+    };
+  };
 }
