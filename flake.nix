@@ -51,6 +51,7 @@
           home-manager.sharedModules = [];
           home-manager.users.achilles = ./hm/achilles;
           home-manager.users.confman = ./hm/manager;
+          home-manager.backupFileExtension = "backup";
           environment.pathsToLink = [
             "/share/applications"
             "/share/xdg-desktop-portal"
