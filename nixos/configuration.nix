@@ -83,6 +83,7 @@
     google-authenticator
     gpg-tui
     ffmpeg-full
+    age
   ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 90;
