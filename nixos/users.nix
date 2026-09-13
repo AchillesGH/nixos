@@ -28,6 +28,7 @@
     shell = pkgs.fish;
     home = "/home/confman";
     createHome = true;
+    uid = 1002;
     description = "System and user configuration manager";
     homeMode = "750";
     packages = with pkgs; [kitty];
@@ -62,12 +63,17 @@
     isNormalUser = true;
     shell = pkgs.bash;
     hashedPassword = "!";
+    linger = false;
+    uid = 1001;
     extraGroups = [
     ];
     packages = with pkgs; [
       flatpak
       chromium
+      steam-run
+      fuse
       unzip
+      gh
     ];
   };
 

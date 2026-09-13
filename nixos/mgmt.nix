@@ -10,9 +10,17 @@
     runtimeInputs = [pkgs.nixos-rebuild];
     text = "${pkgs.nixos-rebuild}/bin/nixos-rebuild boot --flake /home/confman/system#nixos";
   };
+
+  sysrbt = pkgs.writeShellApplication {
+    name = "sysrbt-cmd";
+    runtimeInputs = [pkgs.nixos-rebuild];
+
+    text = "${pkgs.nixos-rebuild}/bin/nixos-rebuild test --flake /home/confman/system#nixos";
+  };
 in {
   environment.systemPackages = [
     sysrbs
     sysrbb
+    sysrbt
   ];
 }

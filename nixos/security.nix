@@ -144,6 +144,14 @@
       persist = true;
       noPass = false;
     }
+
+    {
+      users = ["confman"];
+      cmd = "sysrbt-cmd";
+      keepEnv = false;
+      noPass = true;
+    }
+
     {
       users = ["confman"];
       cmd = "sysrbb-cmd";
@@ -179,6 +187,30 @@
       runAs = "prisoner";
       noPass = true;
       keepEnv = false;
+    }
+
+    {
+      users = ["achilles"];
+      noPass = true;
+      keepEnv = false;
+      cmd = "loginctl";
+      args = ["enable-linger" "${toString config.users.users.prisoner.uid}"];
+    }
+
+    {
+      users = ["achilles"];
+      noPass = true;
+      keepEnv = false;
+      cmd = "loginctl";
+      args = ["disable-linger" "${toString config.users.users.prisoner.uid}"];
+    }
+
+    {
+      users = ["achilles"];
+      noPass = true;
+      keepEnv = false;
+      cmd = "loginctl";
+      args = ["kill-user" "${toString config.users.users.prisoner.uid}"];
     }
   ];
 
