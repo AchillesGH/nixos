@@ -64,6 +64,8 @@ in {
     vlc
     vscodium
     wl-clipboard
+    xhost
+    xlsclients
   ];
 
   systemd.user.services.usbguard-notifier = {
@@ -189,6 +191,7 @@ in {
     size = 24;
   };
   xdg.enable = true;
+  xdg.localBinInPath = true;
   xdg.desktopEntries.nemo = {
     name = "Nemo";
     exec = "${pkgs.nemo-with-extensions}/bin/nemo";
