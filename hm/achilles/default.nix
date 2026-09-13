@@ -317,35 +317,6 @@ in {
     enable = true;
   };
 
-  services.emacs = {
-    enable = true;
-    defaultEditor = true;
-  };
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-    extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.nixfmt
-      epkgs.company
-      epkgs.lsp-mode
-      epkgs.lsp-ui
-    ];
-    extraConfig = ''
-        (setq standard-indent 2)
-
-      (require 'lsp-mode)
-      (require 'lsp-ui)
-      (add-hook 'c-mode-hook 'lsp)
-      (add-hook 'c++-mode-hook 'lsp)
-      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-      (add-hook 'prog-mode-hook 'company-mode)
-
-      (setq lsp-ui-doc-enable t)
-      (setq lsp-ui-sideline-enable t)
-    '';
-  };
-
   services.udiskie = {
     enable = true;
     tray = "auto";
