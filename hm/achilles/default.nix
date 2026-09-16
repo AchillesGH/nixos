@@ -15,7 +15,6 @@ in {
     ./hyprland
     ./waybar
     ./rofi
-    ./nvim
     ./helix
     ./notifs.nix
     ./browsers.nix
