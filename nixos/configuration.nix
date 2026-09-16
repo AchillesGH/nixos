@@ -84,6 +84,8 @@
     gpg-tui
     ffmpeg-full
     age
+    man-pages
+    man-pages-posix
   ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 90;
@@ -130,4 +132,6 @@
   programs.gnupg.agent.pinentryPackage = pkgs.pinentry-qt;
 
   programs.ssh.startAgent = true;
+
+  documentation.dev.enable = true;
 }
