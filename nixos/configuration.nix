@@ -58,10 +58,6 @@
       prettybat
     ];
   };
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
   services.fwupd.enable = true;
   services.scx = {
     enable = true;
