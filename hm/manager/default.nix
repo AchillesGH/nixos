@@ -10,10 +10,10 @@
   imports = [../shared/helix];
 
   programs.helix = {
-    settings.theme = "autumn_night_transparent";
+    settings.theme = "onedark_transparent";
     themes = {
-      autumn_night_transparent = {
-        "inherits" = "autumn_night";
+      onedark_transparent = {
+        "inherits" = "onedark";
         "ui.background" = {};
       };
     };
@@ -60,7 +60,6 @@
     settings = {
       user.name = "achillesgh";
       user.email = "achillesgh@proton.me";
-      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
     };
     signing = {
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFusnqYKJXGm7nIG7iyIOW/zSjUbH7y8lsVHB4DOv8qT achillesgh@proton.me";
@@ -69,6 +68,7 @@
     settings = {
       gpg = {
         format = "ssh";
+        ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       };
     };
   };
