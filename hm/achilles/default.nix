@@ -28,7 +28,6 @@ in {
     bind
     brightnessctl
     clang
-    clang-tools
     loupe
     exiftool
     gcr_4

@@ -5,7 +5,7 @@
 }: {
   programs.helix = {
     enable = true;
-    extraPackages = with pkgs; [lua-language-server nixd];
+    extraPackages = with pkgs; [lua-language-server nixd bash-language-server fish-lsp marksman];
     settings = {
       editor.cursor-shape = {
         normal = "block";
