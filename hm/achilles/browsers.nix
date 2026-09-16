@@ -1,10 +1,4 @@
-{
-  lib,
-  inputs,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.firefox.enable = true;
   programs.firefox.package = pkgs.firefox-bin.override {
     cfg = {

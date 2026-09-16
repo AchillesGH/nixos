@@ -1,11 +1,41 @@
 {
-  config,
   pkgs,
+  lib,
   ...
 }: {
   home.username = "confman";
   home.homeDirectory = "/home/confman";
   home.stateVersion = "26.11";
+
+  imports = [../shared/helix];
+
+  programs.helix = {
+    settings.theme = "autumn_night_transparent";
+    themes = {
+      autumn_night_transparent = {
+        "inherits" = "autumn_night";
+        "ui.background" = {};
+      };
+    };
+    languages. language-server = {
+      nixd = {
+        command = "${lib.getExe pkgs.nixd}";
+        args = ["--semantic-tokens=true"];
+        config.nixd = let
+          nixosConfiguration = "nixos";
+          flakeRef = "(builtins.getFlake (toString /home/confman/system/.))";
+          nixosOpts = "${flakeRef}.nixosConfigurations.${nixosConfiguration}.options";
+        in {
+          nixpkgs.expr = "${flakeRef}.inputs.nixpkgs";
+          options = {
+            nixos.expr = nixosOpts;
+            home-manager.expr = "${nixosOpts}.home-manager.users.type.getSubOptions []";
+          };
+        };
+      };
+    };
+  };
+
   programs.ssh = {
     enable = true;
 
