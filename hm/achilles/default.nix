@@ -2,7 +2,6 @@
   inputs,
   config,
   pkgs,
-  osConfig,
   ...
 }: let
   imv = "org.gnome.Loupe.desktop";
@@ -30,7 +29,7 @@ in {
     clang
     loupe
     exiftool
-    gcr_4
+    gcr_3
     ghostscript
     grimblast
     hyprlock
@@ -318,5 +317,11 @@ in {
   services.udiskie = {
     enable = true;
     tray = "auto";
+  };
+
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-qt;
   };
 }
