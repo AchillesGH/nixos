@@ -59,6 +59,8 @@
     modulePath = "pam_access.so";
     args = ["accessfile=/etc/security/access.conf"];
   };
+  security.pam.services.login.enableGnomeKeyring = true;
+
   users.users.prisoner = {
     isNormalUser = true;
     shell = pkgs.bash;
