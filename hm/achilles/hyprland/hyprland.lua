@@ -1,8 +1,8 @@
 hl.monitor({
-	output = "eDP-1",
-	mode = "preferred",
-	position = "auto",
-	scale = "1",
+    output = "eDP-1",
+    mode = "preferred",
+    position = "auto",
+    scale = "1",
 })
 
 local terminal = "kitty"
@@ -14,39 +14,39 @@ local colorPicker = "hyprpicker -a -n -r"
 local emojiPicker = "rofimoji"
 
 hl.config({
-	general = {
-		gaps_in = 5,
-		gaps_out = 5,
-		border_size = 2,
-		resize_on_border = true,
-		allow_tearing = false,
-		layout = "dwindle",
-	},
+    general = {
+        gaps_in = 5,
+        gaps_out = 5,
+        border_size = 2,
+        resize_on_border = true,
+        allow_tearing = false,
+        layout = "dwindle",
+    },
 
-	decoration = {
-		rounding = 10,
-		rounding_power = 2,
+    decoration = {
+        rounding = 10,
+        rounding_power = 2,
 
-		active_opacity = 1.0,
-		inactive_opacity = 1.0,
+        active_opacity = 1.0,
+        inactive_opacity = 1.0,
 
-		shadow = {
-			enabled = true,
-			range = 4,
-			render_power = 3,
-		},
+        shadow = {
+            enabled = true,
+            range = 4,
+            render_power = 3,
+        },
 
-		blur = {
-			enabled = true,
-			size = 3,
-			passes = 3,
-			vibrancy = 0.1696,
-		},
-	},
-	ecosystem = { enforce_permissions = true },
-	animations = {
-		enabled = true,
-	},
+        blur = {
+            enabled = true,
+            size = 3,
+            passes = 3,
+            vibrancy = 0.1696,
+        },
+    },
+    ecosystem = { enforce_permissions = true },
+    animations = {
+        enabled = true,
+    },
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -76,72 +76,72 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 1, bezier = "almostL
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 hl.config({
-	dwindle = {
-		preserve_split = true, -- You probably want this
-	},
+    dwindle = {
+        preserve_split = true, -- You probably want this
+    },
 })
 hl.config({
-	master = {
-		new_status = "master",
-	},
-})
-
-hl.config({
-	scrolling = {
-		fullscreen_on_one_column = true,
-	},
+    master = {
+        new_status = "master",
+    },
 })
 
 hl.config({
-	misc = {
-		force_default_wallpaper = 0,
-		disable_hyprland_logo = true,
-	},
+    scrolling = {
+        fullscreen_on_one_column = true,
+    },
 })
 
 hl.config({
-	input = {
-		kb_layout = "us",
-		kb_variant = "",
-		kb_model = "",
-		-- kb_options = "caps:swapescape",
-		kb_rules = "",
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = true,
+    },
+})
 
-		follow_mouse = 1,
+hl.config({
+    input = {
+        kb_layout = "us",
+        kb_variant = "",
+        kb_model = "",
+        -- kb_options = "caps:swapescape",
+        kb_rules = "",
 
-		sensitivity = 0,
-		touchpad = {
-			natural_scroll = true,
-		},
-	},
+        follow_mouse = 1,
+
+        sensitivity = 0,
+        touchpad = {
+            natural_scroll = true,
+        },
+    },
 })
 
 hl.gesture({
-	fingers = 3,
-	direction = "horizontal",
-	action = "workspace",
+    fingers = 3,
+    direction = "horizontal",
+    action = "workspace",
 })
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
-	name = "epic-mouse-v1",
-	sensitivity = -0.5,
+    name = "epic-mouse-v1",
+    sensitivity = -0.5,
 })
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 local function bindM(keys, dsp, opts)
-	hl.bind("SUPER + " .. keys, dsp, opts)
+    hl.bind("SUPER + " .. keys, dsp, opts)
 end
 local function bindMS(keys, dsp, opts)
-	bindM("SHIFT + " .. keys, dsp, opts)
+    bindM("SHIFT + " .. keys, dsp, opts)
 end
 local function bindMe(keys, cmd, opts)
-	bindM(keys, hl.dsp.exec_cmd(cmd), opts)
+    bindM(keys, hl.dsp.exec_cmd(cmd), opts)
 end
 local function bindMSe(keys, cmd, opts)
-	bindMe("SHIFT + " .. keys, cmd, opts)
+    bindMe("SHIFT + " .. keys, cmd, opts)
 end
 
 bindMe("Q", terminal)
@@ -164,12 +164,12 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
 for _, dir in ipairs({ "up", "left", "right", "down" }) do
-	bindM(dir, hl.dsp.focus({ direction = dir }))
+    bindM(dir, hl.dsp.focus({ direction = dir }))
 end
 for i = 1, 10 do
-	local key = i % 10
-	bindM(key, hl.dsp.focus({ workspace = i }))
-	bindMS(key, hl.dsp.window.move({ workspace = i }))
+    local key = i % 10
+    bindM(key, hl.dsp.focus({ workspace = i }))
+    bindMS(key, hl.dsp.window.move({ workspace = i }))
 end
 
 bindMe("Escape", "pidof nwg-bar || nwg-bar")
@@ -187,24 +187,24 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ locked = true, repeating = true }
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+    { locked = true, repeating = true }
 )
 hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ locked = true, repeating = true }
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+    { locked = true, repeating = true }
 )
 hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true }
+    "XF86AudioMute",
+    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+    { locked = true, repeating = true }
 )
 hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-	{ locked = true, repeating = true }
+    "XF86AudioMicMute",
+    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+    { locked = true, repeating = true }
 )
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
@@ -216,21 +216,21 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
 local suppressMaximizeRule = hl.window_rule({
-	name = "suppress-maximize-events",
-	match = { class = ".*" },
-	suppress_event = "maximize",
+    name = "suppress-maximize-events",
+    match = { class = ".*" },
+    suppress_event = "maximize",
 })
 
 hl.window_rule({
-	name = "fix-xwayland-drags",
-	match = {
-		class = "^$",
-		title = "^$",
-		xwayland = true,
-		float = true,
-		fullscreen = false,
-		pin = false,
-	},
+    name = "fix-xwayland-drags",
+    match = {
+        class = "^$",
+        title = "^$",
+        xwayland = true,
+        float = true,
+        fullscreen = false,
+        pin = false,
+    },
 
-	no_focus = true,
+    no_focus = true,
 })
