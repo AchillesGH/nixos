@@ -18,6 +18,7 @@ in {
     ./notifs.nix
     ./browsers.nix
     ./user_shell.nix
+    ./protonvpn.nix
   ];
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
@@ -112,6 +113,12 @@ in {
     enable = true;
     enableFishIntegration = true;
   };
+
+  xdg.autostart = {
+    enable = true;
+    readOnly = true;
+  };
+
   xdg.userDirs.setSessionVariables = true;
   xdg.userDirs.enable = true;
   xdg.userDirs.extraConfig.SCREENSHOTS = "${config.xdg.userDirs.pictures}/Screenshots";
