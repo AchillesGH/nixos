@@ -25,8 +25,6 @@
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     useTmpfs = true;
     secrets = {
-      nextdns = {};
-      nextdns_stamp = {};
       main_user_pwd_hash = {};
     };
   };
