@@ -3,9 +3,7 @@
   config,
   pkgs,
   ...
-}: let
-  imv = "org.gnome.Loupe.desktop";
-in {
+}: {
   home.username = "achilles";
   home.homeDirectory = "/home/achilles";
   imports = [
@@ -19,7 +17,14 @@ in {
     ./browsers.nix
     ./user_shell.nix
     ./protonvpn.nix
+    ./xdg.nix
   ];
+
+  xdg.desktopEntries.nemo = {
+    name = "Nemo";
+    exec = "${pkgs.nemo-with-extensions}/bin/nemo";
+  };
+
   home.stateVersion = "26.11";
   home.packages = with pkgs; [
     apksigner
@@ -114,75 +119,6 @@ in {
     enableFishIntegration = true;
   };
 
-  xdg.autostart = {
-    enable = true;
-    readOnly = true;
-  };
-
-  xdg.userDirs.setSessionVariables = true;
-  xdg.userDirs.enable = true;
-  xdg.userDirs.extraConfig.SCREENSHOTS = "${config.xdg.userDirs.pictures}/Screenshots";
-  xdg.configFile."nwg-bar/bar.json".text = ''
-    [
-     {
-       "label": "Lock",
-       "exec": "hyprlock",
-       "icon": "${pkgs.nwg-bar}/share/nwg-bar/images/system-lock-screen.svg"
-     },
-     {
-       "label": "Logout",
-       "exec": "hyprshutdown -t \"Logging out...\"",
-       "icon": "${pkgs.nwg-bar}/share/nwg-bar/images/system-log-out.svg"
-     },
-     {
-       "label": "Reboot",
-       "exec": "hyprshutdown -t \"Rebooting...\" -p \"reboot\"",
-       "icon": "${pkgs.nwg-bar}/share/nwg-bar/images/system-reboot.svg"
-     },
-     {
-       "label": "Shutdown",
-       "exec": "hyprshutdown -p \"systemctl -i poweroff\"",
-       "icon": "${pkgs.nwg-bar}/share/nwg-bar/images/system-shutdown.svg"
-     }
-    ]
-  '';
-  xdg.configFile."nwg-bar/style.css".text = ''
-    window {
-            background-color: rgba (0, 0, 0, 1.0)
-    }
-
-    /* Outer bar container, takes all the window width/height */
-    #outer-box {
-    	margin: 0px
-    }
-
-    /* Inner bar container, surrounds buttons */
-    #inner-box {
-    	background-color: rgba (0, 0, 0, 0.85);
-    	border-radius: 10px;
-    	border-style: none;
-    	border-width: 1px;
-    	border-color: rgba (156, 142, 122, 0.7);
-    	padding: 5px;
-    	margin: 5px
-    }
-
-    button, image {
-    	background: none;
-    	border: none;
-    	box-shadow: none
-    }
-
-    button {
-    	padding-left: 10px;
-    	padding-right: 10px;
-    	margin: 5px
-    }
-
-    button:hover {
-    	background-color: rgba (255, 255, 255, 0.1)
-    }
-  '';
   programs.btop.enable = true;
 
   home.pointerCursor = {
@@ -193,36 +129,6 @@ in {
     hyprcursor.enable = true;
     x11.enable = true;
     size = 24;
-  };
-  xdg.enable = true;
-  xdg.localBinInPath = true;
-  xdg.desktopEntries.nemo = {
-    name = "Nemo";
-    exec = "${pkgs.nemo-with-extensions}/bin/nemo";
-  };
-  xdg.configFile."mimeapps.list".force = true;
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = ["nemo.desktop"];
-      "application/x-gnome-saved-search" = ["nemo.desktop"];
-      "text/html" = ["zen-twilight.desktop"];
-      "application/pdf" = ["chromium-browser.desktop"];
-      "x-scheme-handler/http" = ["zen-twilight.desktop"];
-      "x-scheme-handler/https" = ["zen-twilight.desktop"];
-      "x-scheme-handler/about" = ["zen-twilight.desktop"];
-      "x-scheme-handler/unknown" = ["zen-twilight.desktop"];
-      "image/jpeg" = [imv];
-      "image/png" = [imv];
-      "image/gif" = [imv];
-      "image/webp" = [imv];
-      "image/tiff" = [imv];
-      "image/bmp" = [imv];
-      "image/svg+xml" = [imv];
-      "image/avif" = [imv];
-      "image/heic" = [imv];
-      "image/jxl" = [imv];
-    };
   };
   dconf = {
     settings = {
