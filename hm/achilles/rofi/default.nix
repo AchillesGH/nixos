@@ -11,9 +11,9 @@
       rofi-calc
     ];
 
-    cycle = true;
     theme = ./theme.rasi;
-    extraConfig = {
+    settings = {
+      cycle = true;
       modes = "drun,window";
       fixed-num-lines = false;
       show-icons = true;
