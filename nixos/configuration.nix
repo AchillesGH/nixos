@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
@@ -21,6 +17,9 @@
     ./users.nix
     ./greetd.nix
   ];
+
+  documentation.dev.enable = true;
+
   sops = {
     defaultSopsFile = ../secrets.yaml;
     age.keyFile = "/var/lib/sops-nix/keys.txt";
@@ -32,35 +31,35 @@
     };
   };
 
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/confman/system";
+  nix = {
+    settings.auto-optimise-store = true;
+    package = pkgs.lixPackageSets.stable.lix;
+    settings = {
+      trusted-users = ["confman"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      allowed-users = [
+        "confman"
+        "@wheel"
+      ];
+    };
   };
-  nix.settings.auto-optimise-store = true;
-  nix.package = pkgs.lixPackageSets.stable.lix;
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.trusted-users = ["confman"];
-
   systemd.oomd.enable = true;
-  programs.fish.enable = true;
-
-  programs.steam.enable = true;
-  programs.bat = {
-    enable = true;
-    extraPackages = with pkgs.bat-extras; [
-      batdiff
-      batman
-      prettybat
-    ];
-  };
   services.fwupd.enable = true;
-  services.scx = {
-    enable = true;
-    scheduler = "scx_bpfland";
-  };
+  services.kmscon.enable = true;
+  services.scx.enable = true;
+
+  programs.bat.enable = true;
+  programs.fish.enable = true;
+  programs.steam.enable = true;
+  programs.dconf.enable = true;
+  programs.nh.enable = true;
+  programs.fuse.enable = true; # for xdg-desktop-porta-gtk
+  programs.ssh.startAgent = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -85,33 +84,10 @@
     "vm.swappiness" = 90;
   };
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.allowed-users = [
-    "confman"
-    "@wheel"
-  ];
   system.stateVersion = "26.11";
 
-  /*
-  services.syncthing = {
-    enable = true;
-    user = "achilles";
-    dataDir = "/home/achilles/Backups/GrapheneOS";
-    openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
-  };
-  */
-  systemd.services.syncthing.unitConfig = {
-    after = ["graphical.target"];
-    wantedBy = lib.mkForce [];
-  };
-
-  programs.dconf.enable = true;
   console.earlySetup = true;
   services.kmscon = {
-    enable = true;
     config = {
       font-size = 16;
       hwaccel = true;
@@ -119,10 +95,18 @@
     };
     extraOptions = "--term xterm-256color";
   };
+  services.scx = {
+    scheduler = "scx_bpfland";
+  };
 
-  programs.fuse.enable = true; # for xdg-desktop-porta-gtk
-
-  programs.ssh.startAgent = true;
-
-  documentation.dev.enable = true;
+  programs.bat.extraPackages = with pkgs.bat-extras; [
+    batdiff
+    batman
+    prettybat
+  ];
+  programs.nh = {
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/confman/system";
+  };
 }
