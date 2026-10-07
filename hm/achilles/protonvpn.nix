@@ -43,6 +43,8 @@
     };
     "Proton/VPN/app-config.json".text = builtins.toJSON {
       tray_pinned_servers = [
+        "CH"
+        "DE"
         "JP"
         "US"
       ];
